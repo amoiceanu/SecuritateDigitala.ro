@@ -32,8 +32,13 @@ Route::post('/contact', [ContactController::class, 'store'])->middleware('thrott
 Route::get('/admin/login', [AdminAuthController::class, 'create'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'store'])->middleware('throttle:5,1')->name('admin.login.store');
 Route::post('/admin/logout', [AdminAuthController::class, 'destroy'])->middleware('auth')->name('admin.logout');
+Route::get('/admin', function () {
+    $user = auth()->user();
+    abort_unless($user?->is_admin || $user?->is_exposure_admin, 403);
+
+    return redirect($user->is_exposure_admin ? '/admin/pagini-si-module' : '/admin/articole');
+})->middleware('auth')->name('admin.dashboard');
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function (): void {
-    Route::redirect('/', '/admin/articole')->name('dashboard');
     Route::get('google-indexing', [GoogleIndexingController::class, 'index'])->name('google-indexing.index');
     Route::post('google-indexing/connect', [GoogleIndexingController::class, 'connect'])->name('google-indexing.connect');
     Route::get('google-indexing/callback', [GoogleIndexingController::class, 'callback'])->name('google-indexing.callback');
