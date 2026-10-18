@@ -1,20 +1,26 @@
 <?php
 
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\PublicCategoryController;
-use App\Http\Controllers\Admin\GoogleIndexingController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\ContactMessageController as AdminContactMessageController;
 use App\Http\Controllers\Admin\DailyTipController as AdminDailyTipController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Response;
+use App\Http\Controllers\Admin\GoogleIndexingController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ExposureAdminController;
+use App\Http\Controllers\ExposureController;
+use App\Http\Controllers\PublicCategoryController;
+use App\Http\Controllers\SitePagesAdminController;
+use App\Http\Middleware\ExposureAccess;
+use App\Http\Middleware\SiteAdmin;
 use App\Services\PublicSitemap;
-use Illuminate\Session\Middleware\StartSession;
-use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Http\Response as HttpResponse;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Route;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 Route::get('/', [BlogController::class, 'home'])->name('home');
 Route::get('/articole', [BlogController::class, 'index'])->name('articles.index');
@@ -47,11 +53,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
 Route::view('/politica-de-confidentialitate', 'pages.privacy')->name('privacy');
 Route::view('/politica-cookies', 'pages.cookies')->name('cookies');
 Route::view('/termeni-si-conditii', 'pages.terms')->name('terms');
+
 Route::get('/sitemap.xml', function (PublicSitemap $sitemap) {
     $urls = $sitemap->entries();
     $xml = view('sitemap', compact('urls'))->render();
-
-    $response = Response::make($xml, 200, [
+    $response = Response::make($xml, HttpResponse::HTTP_OK, [
         'Content-Type' => 'application/xml; charset=UTF-8',
         'Cache-Control' => 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400',
     ])->setEtag(hash('sha256', $xml));
@@ -59,7 +65,27 @@ Route::get('/sitemap.xml', function (PublicSitemap $sitemap) {
 
     return $response;
 })->withoutMiddleware([StartSession::class, ShareErrorsFromSession::class, VerifyCsrfToken::class])->name('sitemap');
-Route::get('/robots.txt', fn () => Response::make("User-agent: *\nAllow: /\n\nSitemap: https://securitatedigitala.ro/sitemap.xml\n", 200, [
+Route::get('/robots.txt', fn () => Response::make("User-agent: *\nAllow: /\n\nSitemap: https://securitatedigitala.ro/sitemap.xml\n", HttpResponse::HTTP_OK, [
     'Content-Type' => 'text/plain; charset=UTF-8',
     'Cache-Control' => 'public, max-age=3600, s-maxage=86400',
 ]))->withoutMiddleware([StartSession::class, ShareErrorsFromSession::class, VerifyCsrfToken::class])->name('robots');
+
+// Private exposure workflows keep searched subjects out of application URLs.
+Route::middleware(ExposureAccess::class)->prefix('verificare-date-personale')->name('exposure.')->group(function (): void {
+    Route::get('/', [ExposureController::class, 'index'])->name('index');
+    Route::post('/', [ExposureController::class, 'store'])->name('store');
+    Route::get('/confirmare/{token}', [ExposureController::class, 'verificationLink'])->middleware('throttle:30,1')->name('verify');
+    Route::get('/confirmare', [ExposureController::class, 'confirmation'])->name('confirmation');
+    Route::post('/confirmare', [ExposureController::class, 'confirm'])->middleware('throttle:10,1')->name('confirm');
+    Route::get('/raport/{id}', [ExposureController::class, 'show'])->middleware('throttle:120,1')->name('report');
+    Route::get('/raport/{id}/status', [ExposureController::class, 'status'])->middleware('throttle:120,1')->name('status');
+    Route::post('/raport/{id}/retrimite', [ExposureController::class, 'resend'])->name('resend');
+    Route::post('/raport/{id}/clasificare/{index}', [ExposureController::class, 'classify'])->whereNumber('index')->middleware('throttle:30,1')->name('classify');
+    Route::delete('/raport/{id}', [ExposureController::class, 'destroy'])->name('destroy');
+});
+Route::middleware([ExposureAccess::class.':admin', 'auth.basic', SiteAdmin::class, 'throttle:30,1'])->group(function (): void {
+    Route::get('/admin/pagini-si-module', [SitePagesAdminController::class, 'index'])->name('admin.pages');
+    Route::put('/admin/pagini-si-module', [SitePagesAdminController::class, 'update'])->name('admin.pages.update');
+    Route::get('/admin/verificarea-datelor', [ExposureAdminController::class, 'index'])->name('exposure.admin');
+    Route::put('/admin/verificarea-datelor', [ExposureAdminController::class, 'update'])->name('exposure.admin.update');
+});

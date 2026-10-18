@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\SiteAvailability;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -14,9 +15,23 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias(['admin' => EnsureUserIsAdmin::class]);
-        $middleware->web(append: [RedirectCanonicalDomain::class]);
+        $middleware->web(append: [RedirectCanonicalDomain::class, SiteAvailability::class]);
         $middleware->redirectGuestsTo(fn () => route('admin.login'));
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->dontFlash(['subject', 'location', 'email', 'password', 'password_confirmation', 'token']);
+        $exceptions->report(function (Throwable $e) {
+            if (request()->is('verificare-date-personale*', 'admin/verificarea-datelor*')) {
+                return false;
+            }
+        });
+        $exceptions->respond(function ($response) {
+            if (request()->is('verificare-date-personale*', 'admin/verificarea-datelor*')) {
+                $response->headers->set('Cache-Control', 'private, no-store');
+                $response->headers->set('X-Robots-Tag', 'noindex, nofollow, noarchive');
+                $response->headers->set('Referrer-Policy', 'no-referrer');
+            }
+
+            return $response;
+        });
     })->create();

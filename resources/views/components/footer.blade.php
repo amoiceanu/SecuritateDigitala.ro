@@ -13,7 +13,8 @@
             <a href="{{ route('home') }}">Home</a>
             <a href="{{ route('articles.index') }}">Articole</a>
             <a href="{{ route('home') }}#sfatul-zilei">Sfatul zilei</a>
-            <a href="{{ route('articles.index', ['categorie' => 'ghiduri']) }}">Ghiduri</a>
+            <a href="{{ route('articles.index', ['categorie' => 'ghiduri-practice']) }}">Ghiduri</a>
+            @if(app(\App\Services\SitePages::class)->visible('exposure'))<a href="{{ route('exposure.index') }}">Verifică datele</a>@endif
             <a href="{{ route('about') }}">Despre</a>
             <a href="{{ route('contact') }}">Contact</a>
         </div>
