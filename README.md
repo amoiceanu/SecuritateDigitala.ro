@@ -82,3 +82,7 @@ Deploy-ul pornește doar la push pe `main`, după toate cele patru joburi CI. Co
 ## Notă
 
 Conținutul publicat are scop educativ și informativ și nu reprezintă consultanță juridică sau de securitate informatică personalizată. Textele despre confidențialitate și cookie-uri sunt puncte de pornire, nu documente juridice definitive.
+
+## Calendar editorial
+
+În admin: **Calendar editorial** (`/admin/calendar-editorial`). Pentru planul de 42 de drafturi: `php artisan migrate`, apoi `php artisan editorial:seed`. Data propusă este separată de publicare; niciun articol nu se publică automat. Instrucțiuni: [calendarul editorial](docs/calendar-editorial.md).

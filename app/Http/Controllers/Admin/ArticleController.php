@@ -35,9 +35,11 @@ class ArticleController extends Controller
         ]);
     }
 
-    public function create(): View
+    public function create(Request $request): View
     {
-        return view('admin.articles.form', ['article' => new Article(['status' => 'draft']), 'categories' => Category::orderBy('name')->get()]);
+        $request->validate(['editorial_date' => ['nullable', 'date_format:Y-m-d']]);
+
+        return view('admin.articles.form', ['article' => new Article(['status' => 'draft', 'access_type' => 'public', 'editorial_date' => $request->input('editorial_date')]), 'categories' => Category::orderBy('name')->get()]);
     }
 
     public function show(Article $article): View
@@ -50,7 +52,7 @@ class ArticleController extends Controller
         $data = $this->validatedData($request);
         Article::create($data);
 
-        return redirect()->route('admin.articole.index')->with('success', 'Articolul a fost creat.');
+        return $this->savedRedirect($request, $data)->with('success', 'Articolul a fost creat.');
     }
 
     public function edit(Article $article): View
@@ -60,9 +62,10 @@ class ArticleController extends Controller
 
     public function update(Request $request, Article $article): RedirectResponse
     {
-        $article->update($this->validatedData($request, $article));
+        $data = $this->validatedData($request, $article);
+        $article->update($data);
 
-        return redirect()->route('admin.articole.index')->with('success', 'Articolul a fost actualizat.');
+        return $this->savedRedirect($request, $data)->with('success', 'Articolul a fost actualizat.');
     }
 
     public function destroy(Article $article): RedirectResponse
@@ -72,19 +75,28 @@ class ArticleController extends Controller
         return back()->with('success', 'Articolul a fost șters.');
     }
 
+    private function savedRedirect(Request $request, array $data): RedirectResponse
+    {
+        return $request->boolean('calendar')
+            ? redirect()->route('admin.editorial.index', ['month' => isset($data['editorial_date']) ? substr($data['editorial_date'], 0, 7) : now(config('editorial.timezone'))->format('Y-m')])
+            : redirect()->route('admin.articole.index');
+    }
+
     private function validatedData(Request $request, ?Article $article = null): array
     {
         $data = $request->validate([
             'category_id' => ['required', 'integer', 'exists:categories,id'],
             'title' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255', Rule::unique('articles', 'slug')->ignore($article?->id)],
-            'excerpt' => ['required', 'string', 'max:1000'],
-            'content' => ['required', 'string'],
+            'excerpt' => ['required_if:status,published', 'nullable', 'string', 'max:1000'],
+            'content' => ['required_if:status,published', 'nullable', 'string'],
             'image' => ['nullable', 'string', 'max:255'],
             'author' => ['required', 'string', 'max:255'],
             'reading_time' => ['required', 'integer', 'min:1', 'max:65535'],
             'is_featured' => ['sometimes', 'boolean'],
             'status' => ['required', Rule::in(['draft', 'published'])],
+            'editorial_date' => ['nullable', 'date_format:Y-m-d'],
+            'access_type' => ['sometimes', Rule::in(['public', 'premium'])],
             'published_at' => ['nullable', 'date'],
             'seo_title' => ['nullable', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string', 'max:320'],
@@ -92,6 +104,9 @@ class ArticleController extends Controller
             'secondary_keywords' => ['nullable', 'string', 'max:1000'],
         ]);
 
+        $data['content'] = $data['content'] ?? '';
+        $data['excerpt'] = $data['excerpt'] ?? '';
+        $data['access_type'] = $data['access_type'] ?? $article?->access_type ?? 'public';
         $data['slug'] = filled($data['slug'] ?? null) ? Str::slug($data['slug']) : Str::slug($data['title']);
         validator(['slug' => $data['slug']], ['slug' => ['required', 'max:255', Rule::unique('articles', 'slug')->ignore($article?->id)]])->validate();
         $data['is_featured'] = $request->boolean('is_featured');

@@ -38,6 +38,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::post('google-indexing/inspect/{auditItem}', [GoogleIndexingController::class, 'inspect'])->name('google-indexing.inspect');
     Route::post('google-indexing/audit', [GoogleIndexingController::class, 'audit'])->name('google-indexing.audit');
     Route::get('google-indexing/export.csv', [GoogleIndexingController::class, 'export'])->name('google-indexing.export');
+    Route::get('calendar-editorial', [\App\Http\Controllers\Admin\EditorialCalendarController::class, 'index'])->name('editorial.index');
     Route::resource('articole', AdminArticleController::class)->except('show')->parameters(['articole' => 'article']);
     Route::get('articole/{article}', [AdminArticleController::class, 'show'])->name('articole.show');
     Route::resource('sectiuni', AdminCategoryController::class)->except('show')->parameters(['sectiuni' => 'category']);

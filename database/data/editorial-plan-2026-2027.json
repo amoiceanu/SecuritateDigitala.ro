@@ -1,0 +1,338 @@
+[
+  {
+    "key": "plan-2026-11-1",
+    "title": "Black Friday: cum verifici un magazin online înainte să plătești",
+    "category": "Fraude online",
+    "category_slug": "fraude-online",
+    "editorial_date": "2026-11-05",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2026-11-2",
+    "title": "Cum recunoști o ofertă falsă promovată pe social media",
+    "category": "Fraude online",
+    "category_slug": "fraude-online",
+    "editorial_date": "2026-11-15",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2026-11-3",
+    "title": "Checklist de cumpărături online sigure",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2026-11-25",
+    "access_type": "premium"
+  },
+  {
+    "key": "plan-2026-12-1",
+    "title": "Cum îți protejezi telefonul și conturile când călătorești",
+    "category": "Securitate dispozitive",
+    "category_slug": "securitate-dispozitive",
+    "editorial_date": "2026-12-05",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2026-12-2",
+    "title": "Ce faci dacă îți pierzi telefonul: primii pași pentru iPhone și Android",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2026-12-15",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2026-12-3",
+    "title": "Checklist pentru vacanță: conturi, dispozitive și copii de siguranță",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2026-12-25",
+    "access_type": "premium"
+  },
+  {
+    "key": "plan-2027-01-1",
+    "title": "Managerul de parole: cum alegi unul și cum începi să-l folosești",
+    "category": "Parole și autentificare",
+    "category_slug": "parole-autentificare",
+    "editorial_date": "2027-01-05",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-01-2",
+    "title": "Cum îți securizezi conturile de email secundare și de recuperare",
+    "category": "Parole și autentificare",
+    "category_slug": "parole-autentificare",
+    "editorial_date": "2027-01-15",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-01-3",
+    "title": "Ghid practic: configurarea unui seif digital și a accesului de urgență",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2027-01-25",
+    "access_type": "premium"
+  },
+  {
+    "key": "plan-2027-02-1",
+    "title": "Cum funcționează fraudele romantice și ce semne să urmărești",
+    "category": "Fraude online",
+    "category_slug": "fraude-online",
+    "editorial_date": "2027-02-05",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-02-2",
+    "title": "Cum verifici identitatea unei persoane cunoscute doar online",
+    "category": "Date personale",
+    "category_slug": "date-personale",
+    "editorial_date": "2027-02-15",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-02-3",
+    "title": "Fișă de verificare pentru conversații și relații începute online",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2027-02-25",
+    "access_type": "premium"
+  },
+  {
+    "key": "plan-2027-03-1",
+    "title": "Mesaje false despre taxe, facturi sau colete: cum verifici cererea",
+    "category": "Fraude online",
+    "category_slug": "fraude-online",
+    "editorial_date": "2027-03-05",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-03-2",
+    "title": "Ce faci dacă ai introdus datele cardului pe o pagină suspectă",
+    "category": "Securitate financiară",
+    "category_slug": "securitate-financiara",
+    "editorial_date": "2027-03-15",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-03-3",
+    "title": "Plan de reacție pentru fraudă financiară online",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2027-03-25",
+    "access_type": "premium"
+  },
+  {
+    "key": "plan-2027-04-1",
+    "title": "Cum alegi actualizările și setările de securitate pentru telefon",
+    "category": "Securitate dispozitive",
+    "category_slug": "securitate-dispozitive",
+    "editorial_date": "2027-04-05",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-04-2",
+    "title": "Cum îți securizezi routerul și rețeaua Wi-Fi de acasă",
+    "category": "Securitate dispozitive",
+    "category_slug": "securitate-dispozitive",
+    "editorial_date": "2027-04-15",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-04-3",
+    "title": "Checklist pentru securizarea rețelei de acasă și a dispozitivelor conectate",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2027-04-25",
+    "access_type": "premium"
+  },
+  {
+    "key": "plan-2027-05-1",
+    "title": "Cum îți protejezi părinții de fraudele prin telefon și mesaje",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2027-05-05",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-05-2",
+    "title": "Marketplace-uri și anunțuri: semne că vânzătorul sau cumpărătorul poate fi fals",
+    "category": "Fraude online",
+    "category_slug": "fraude-online",
+    "editorial_date": "2027-05-15",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-05-3",
+    "title": "Ghid pentru o verificare de securitate digitală în familie",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2027-05-25",
+    "access_type": "premium"
+  },
+  {
+    "key": "plan-2027-06-1",
+    "title": "Wi-Fi public: ce poți face în siguranță și ce e bine să eviți",
+    "category": "Securitate dispozitive",
+    "category_slug": "securitate-dispozitive",
+    "editorial_date": "2027-06-05",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-06-2",
+    "title": "Cum îți pregătești conturile înainte să pleci în vacanță",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2027-06-15",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-06-3",
+    "title": "Checklist de securitate digitală pentru călătorii",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2027-06-25",
+    "access_type": "premium"
+  },
+  {
+    "key": "plan-2027-07-1",
+    "title": "Cum îți protejezi conturile de gaming și obiectele digitale",
+    "category": "Rețele sociale",
+    "category_slug": "retele-sociale",
+    "editorial_date": "2027-07-05",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-07-2",
+    "title": "Ce setări de confidențialitate să verifici la conturile copiilor",
+    "category": "Rețele sociale",
+    "category_slug": "retele-sociale",
+    "editorial_date": "2027-07-15",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-07-3",
+    "title": "Ghid pentru părinți: reguli digitale de familie și setări de siguranță",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2027-07-25",
+    "access_type": "premium"
+  },
+  {
+    "key": "plan-2027-08-1",
+    "title": "Voce sau video generate cu AI: cum verifici cererile urgente de bani",
+    "category": "Inteligență artificială",
+    "category_slug": "inteligenta-artificiala",
+    "editorial_date": "2027-08-05",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-08-2",
+    "title": "Cum confirmi o cerere de ajutor primită de la o rudă sau un prieten",
+    "category": "Fraude online",
+    "category_slug": "fraude-online",
+    "editorial_date": "2027-08-15",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-08-3",
+    "title": "Plan de familie împotriva fraudelor cu voce și video imitate",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2027-08-25",
+    "access_type": "premium"
+  },
+  {
+    "key": "plan-2027-09-1",
+    "title": "Securitatea conturilor folosite la școală și facultate",
+    "category": "Securitate online",
+    "category_slug": "securitate-online-generala",
+    "editorial_date": "2027-09-05",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-09-2",
+    "title": "Cum îți separi conturile personale de cele de muncă sau studiu",
+    "category": "Securitate online",
+    "category_slug": "securitate-online-generala",
+    "editorial_date": "2027-09-15",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-09-3",
+    "title": "Checklist pentru un laptop pregătit de școală, facultate sau lucru",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2027-09-25",
+    "access_type": "premium"
+  },
+  {
+    "key": "plan-2027-10-1",
+    "title": "Cum verifici ce aplicații au acces la conturile tale",
+    "category": "Confidențialitate",
+    "category_slug": "confidentialitate",
+    "editorial_date": "2027-10-05",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-10-2",
+    "title": "Ce informații poate dezvălui profilul tău public de pe internet",
+    "category": "Date personale",
+    "category_slug": "date-personale",
+    "editorial_date": "2027-10-15",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-10-3",
+    "title": "Audit digital personal: fișă de verificare pentru conturi, dispozitive și date publice",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2027-10-25",
+    "access_type": "premium"
+  },
+  {
+    "key": "plan-2027-11-1",
+    "title": "Cum verifici linkurile din reclame și postări sponsorizate",
+    "category": "Fraude online",
+    "category_slug": "fraude-online",
+    "editorial_date": "2027-11-05",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-11-2",
+    "title": "Cum plătești online cu risc mai mic și ce notificări să activezi",
+    "category": "Securitate financiară",
+    "category_slug": "securitate-financiara",
+    "editorial_date": "2027-11-15",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-11-3",
+    "title": "Ghid de verificare a unei achiziții online, de la reclamă la confirmarea plății",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2027-11-25",
+    "access_type": "premium"
+  },
+  {
+    "key": "plan-2027-12-1",
+    "title": "Cum îți securizezi conturile pe un telefon sau laptop nou",
+    "category": "Securitate dispozitive",
+    "category_slug": "securitate-dispozitive",
+    "editorial_date": "2027-12-05",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-12-2",
+    "title": "Copii de siguranță: ce să salvezi și cum verifici că le poți restaura",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2027-12-15",
+    "access_type": "public"
+  },
+  {
+    "key": "plan-2027-12-3",
+    "title": "Plan anual de întreținere a securității digitale",
+    "category": "Ghiduri practice",
+    "category_slug": "ghiduri-practice",
+    "editorial_date": "2027-12-25",
+    "access_type": "premium"
+  }
+]

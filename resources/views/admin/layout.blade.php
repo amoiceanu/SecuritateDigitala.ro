@@ -16,6 +16,7 @@
         <div class="admin-actions">
             <nav class="admin-nav" aria-label="Administrare">
                 <a class="{{ request()->routeIs('admin.articole.*') ? 'active' : '' }}" href="{{ route('admin.articole.index') }}">Articole</a>
+                <a class="{{ request()->routeIs('admin.editorial.*') ? 'active' : '' }}" href="{{ route('admin.editorial.index') }}">Calendar editorial</a>
                 <a class="{{ request()->routeIs('admin.sectiuni.*') ? 'active' : '' }}" href="{{ route('admin.sectiuni.index') }}">Secțiuni</a>
                 <a class="{{ request()->routeIs('admin.sfaturi.*') ? 'active' : '' }}" href="{{ route('admin.sfaturi.index') }}">Sfatul zilei</a>
                 <a class="{{ request()->routeIs('admin.google-indexing.*') ? 'active' : '' }}" href="{{ route('admin.google-indexing.index') }}">Google Indexing</a>

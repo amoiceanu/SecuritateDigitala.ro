@@ -4,7 +4,9 @@
 <div class="admin-heading"><div><h1>{{ $article->exists ? 'Editează articolul' : 'Articol nou' }}</h1><p>Drafturile sunt vizibile doar în administrare. Publicarea le face accesibile vizitatorilor.</p></div><a class="admin-button" href="{{ route('admin.articole.index') }}">Înapoi la articole</a></div>
 <section class="admin-panel">
     <form class="admin-form" method="post" action="{{ $article->exists ? route('admin.articole.update', $article) : route('admin.articole.store') }}">
-        @csrf @if($article->exists) @method('put') @endif
+        @csrf
+        @if(request()->boolean('calendar') || old('calendar'))<input type="hidden" name="calendar" value="1"><a class="admin-button" href="{{ route('admin.editorial.index',['month'=>($article->editorial_date?->format('Y-m')??now(config('editorial.timezone'))->format('Y-m'))]) }}">Înapoi la calendar</a>@endif
+        @if($article->exists) @method('put') @endif
         <div class="admin-form-grid">
             <div class="admin-field"><label for="title">Titlu</label><input id="title" name="title" value="{{ old('title', $article->title) }}" required maxlength="255"></div>
             <div class="admin-field"><label for="slug">Adresă (slug, opțional)</label><input id="slug" name="slug" value="{{ old('slug', $article->slug) }}" placeholder="generat-din-titlu"></div>
@@ -16,12 +18,14 @@
             <div class="admin-field full"><label for="secondary_keywords">Termeni secundari (separați prin virgulă)</label><input id="secondary_keywords" name="secondary_keywords" value="{{ old('secondary_keywords', implode(', ', $article->secondary_keywords ?? [])) }}" maxlength="1000"></div>
             <div class="admin-field"><label for="image">Imagine (cale din public, opțional)</label><input id="image" name="image" value="{{ old('image', $article->image) }}" placeholder="images/articles/exemplu.svg"></div>
             <div class="admin-field"><label for="reading_time">Timp de citire (minute)</label><input id="reading_time" name="reading_time" type="number" min="1" max="65535" value="{{ old('reading_time', $article->reading_time ?? 5) }}" required></div>
+            <div class="admin-field"><label for="editorial_date">Data propusă (calendar editorial)</label><input id="editorial_date" name="editorial_date" type="date" value="{{ old('editorial_date',$article->editorial_date?->format('Y-m-d')) }}"><small>Dată editorială în Europe/Bucharest. Nu publică și nu programează automat articolul.</small></div>
+            <div class="admin-field"><label for="access_type">Tip de acces editorial</label><select id="access_type" name="access_type"><option value="public" @selected(old('access_type',$article->access_type??'public')==='public')>Public</option><option value="premium" @selected(old('access_type',$article->access_type)==='premium')>Premium</option></select><small>Etichetă de planificare; nu activează un paywall.</small></div>
             <div class="admin-field"><label for="status">Stare</label><select id="status" name="status" required><option value="draft" @selected(old('status', $article->status) === 'draft')>Draft</option><option value="published" @selected(old('status', $article->status) === 'published')>Publicat</option></select></div>
             <div class="admin-field"><label for="published_at">Data publicării</label><input id="published_at" name="published_at" type="date" value="{{ old('published_at', $article->published_at?->format('Y-m-d')) }}"><small>Data viitoare programează articolul pentru publicare.</small></div>
         </div>
         <div class="admin-checks"><label class="admin-check"><input type="checkbox" name="is_featured" value="1" @checked(old('is_featured', $article->is_featured))> Evidențiază pe prima pagină</label></div>
-        <div class="admin-field"><label for="excerpt">Descriere scurtă</label><textarea id="excerpt" name="excerpt" rows="3" maxlength="1000" required>{{ old('excerpt', $article->excerpt) }}</textarea></div>
-        <div class="admin-field"><label for="content">Conținut (HTML permis)</label><textarea id="content" name="content" rows="18" required>{{ old('content', $article->content) }}</textarea></div>
+        <div class="admin-field"><label for="excerpt">Descriere scurtă (obligatorie doar la publicare)</label><textarea id="excerpt" name="excerpt" rows="3" maxlength="1000">{{ old('excerpt', $article->excerpt) }}</textarea></div>
+        <div class="admin-field"><label for="content">Conținut (HTML permis; poate rămâne gol în draft)</label><textarea id="content" name="content" rows="18">{{ old('content', $article->content) }}</textarea></div>
         <div><button class="admin-button primary" type="submit">{{ $article->exists ? 'Salvează modificările' : 'Creează articolul' }}</button></div>
     </form>
 </section>
