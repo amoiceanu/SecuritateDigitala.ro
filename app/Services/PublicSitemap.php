@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Support\Collection;
+use App\Services\SitePages;
 
 class PublicSitemap
 {
@@ -14,23 +15,23 @@ class PublicSitemap
     /** @return Collection<int, array{loc:string,lastmod?:string}> */
     public function entries(): Collection
     {
-        // Keep the existing six public pages in the sitemap while adding the
-        // canonical category landing pages and published articles.
-        $entries = collect([
-            ['loc' => self::ORIGIN.'/'],
-            ['loc' => self::ORIGIN.route('articles.index', [], absolute: false)],
-            ['loc' => self::ORIGIN.route('about', [], absolute: false)],
-            ['loc' => self::ORIGIN.route('contact', [], absolute: false)],
-            ['loc' => self::ORIGIN.route('privacy', [], absolute: false)],
-            ['loc' => self::ORIGIN.route('cookies', [], absolute: false)],
-        ]);
+        $pages = app(SitePages::class);
+        $entries = collect();
+        foreach (['home', 'articles', 'about', 'contact', 'privacy', 'cookies'] as $key) {
+            if ($pages->enabled($key)) {
+                $entries->push(['loc' => self::ORIGIN.route(config('site_pages.'.$key.'.route'), [], absolute: false)]);
+            }
+        }
 
-        $categories = Category::query()
+        $categories = $pages->enabled('articles') ? Category::query()
             ->whereHas('articles', fn ($query) => $query->where('status', 'published')->whereNotNull('published_at')->whereDate('published_at', '<=', now()))
             ->withMax(['articles as content_updated_at' => fn ($query) => $query->where('status', 'published')->whereNotNull('published_at')->whereDate('published_at', '<=', now())], 'updated_at')
             ->orderBy('slug')
-            ->get();
+            ->get() : collect();
         foreach ($categories as $category) {
+            if ($category->slug === 'ghiduri-practice' && ! $pages->enabled('guides')) {
+                continue;
+            }
             $entry = ['loc' => self::ORIGIN.route('sections.show', $category->slug, absolute: false)];
             if ($category->content_updated_at) {
                 $entry['lastmod'] = Carbon::parse($category->content_updated_at)->toAtomString();
@@ -38,12 +39,12 @@ class PublicSitemap
             $entries->push($entry);
         }
 
-        $articles = Article::query()
+        $articles = $pages->enabled('articles') ? Article::query()
             ->where('status', 'published')
             ->whereNotNull('published_at')
             ->whereDate('published_at', '<=', now())
             ->orderBy('slug')
-            ->get();
+            ->get() : collect();
         foreach ($articles as $article) {
             $entry = ['loc' => self::ORIGIN.route('articles.show', $article->slug, absolute: false)];
             if ($article->updated_at) {
