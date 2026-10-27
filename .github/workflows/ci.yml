@@ -207,5 +207,6 @@ jobs:
           php artisan migrate --force
           php artisan db:seed --class=ContentCatalogSeeder --force
           php artisan editorial:seed
+          php artisan article:publish-black-friday
           php artisan optimize
           REMOTE
