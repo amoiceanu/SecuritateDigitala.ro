@@ -3,6 +3,7 @@
 @use 'contact-success';
 @use 'article-share';
 @use 'category-tile';
+@use 'exposure-page' as exposure;
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 $breakpoint-tablet: 991px;
@@ -20,3 +21,5 @@ $breakpoint-small: 400px;
 .exposure-page .btn-primary{--bs-btn-disabled-bg:#a82234;--bs-btn-disabled-border-color:#a82234;--bs-btn-disabled-color:#f5c4cb;--bs-btn-disabled-opacity:.8}.exposure-page .btn-primary:disabled{background:#a82234;border-color:#a82234;color:#f5c4cb}
 
 .admin-navigation{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:30px}.site-pages-table th{min-width:210px}.site-pages-table td{min-width:140px;vertical-align:middle}.site-toggle{display:flex;align-items:center;gap:9px;cursor:pointer}.site-toggle input{width:20px;height:20px;accent-color:var(--red)}.site-page-state{display:inline-block;color:#ff9ca7;font-size:11px;margin-top:6px}.site-pages-table strong{font-size:14px}
+
+@include exposure.styles;

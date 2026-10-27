@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 420" fill="none">
+  <defs>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="matrix(0 190 -215 0 355 205)" gradientUnits="userSpaceOnUse"><stop stop-color="#F3273F" stop-opacity=".22"/><stop offset="1" stop-color="#F3273F" stop-opacity="0"/></radialGradient>
+    <linearGradient id="panel" x1="78" x2="292" y1="91" y2="183" gradientUnits="userSpaceOnUse"><stop stop-color="#172431"/><stop offset="1" stop-color="#0C131B"/></linearGradient>
+    <linearGradient id="shield" x1="349" x2="476" y1="94" y2="324" gradientUnits="userSpaceOnUse"><stop stop-color="#F64A5C"/><stop offset=".48" stop-color="#8E1D2B"/><stop offset="1" stop-color="#1A1118"/></linearGradient>
+    <linearGradient id="laptop" x1="336" x2="584" y1="292" y2="374" gradientUnits="userSpaceOnUse"><stop stop-color="#253849"/><stop offset="1" stop-color="#101923"/></linearGradient>
+    <filter id="blur" width="1.5" height="1.5" x="-.25" y="-.25"><feGaussianBlur stdDeviation="18"/></filter>
+    <filter id="shadow" width="1.5" height="1.5" x="-.25" y="-.25"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#000" flood-opacity=".45"/></filter>
+  </defs>
+  <ellipse cx="365" cy="207" fill="url(#glow)" rx="215" ry="190"/>
+  <circle cx="386" cy="207" r="168" stroke="#F3273F" stroke-opacity=".12"/>
+  <circle cx="386" cy="207" r="132" stroke="#9DAABC" stroke-opacity=".12" stroke-dasharray="2 9"/>
+  <circle cx="386" cy="207" r="99" stroke="#F3273F" stroke-opacity=".16"/>
+  <circle cx="386" cy="207" r="69" stroke="#F3273F" stroke-opacity=".2"/>
+  <path d="M386 39v40m0 256v40M218 207h40m256 0h40" stroke="#F3273F" stroke-opacity=".2"/>
+  <circle cx="475" cy="105" r="3" fill="#F3273F"/><circle cx="273" cy="280" r="2.5" fill="#F3273F"/><circle cx="496" cy="270" r="2" fill="#D9E3EF"/>
+  <g filter="url(#shadow)" transform="rotate(7 181 140)">
+    <rect x="54" y="85" width="253" height="93" rx="13" fill="url(#panel)" stroke="#3A4A5B"/>
+    <rect x="68" y="103" width="47" height="47" rx="11" fill="#32151E" stroke="#812431"/>
+    <path d="m80 116 11 9 12-9v20H80v-20Zm0 1 11 9 12-9" stroke="#F64A5C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="129" y="121" fill="#F7F9FC" font-family="Arial,sans-serif" font-size="14" font-weight="700">nume@exemplu.ro</text>
+    <text x="129" y="145" fill="#FF5267" font-family="Arial,sans-serif" font-size="13">Apare în 3 breșe</text>
+    <text x="129" y="162" fill="#78889A" font-family="Arial,sans-serif" font-size="9">exemplu ilustrativ</text>
+  </g>
+  <g filter="url(#shadow)" transform="rotate(4 160 233)">
+    <rect x="40" y="193" width="247" height="79" rx="12" fill="url(#panel)" stroke="#354657"/>
+    <circle cx="78" cy="232" r="20" fill="#162433" stroke="#31475A"/>
+    <circle cx="78" cy="226" r="7" fill="#A9B5C6"/><path d="M63 247c2-9 8-13 15-13s13 4 15 13" fill="#A9B5C6"/>
+    <text x="112" y="228" fill="#F7F9FC" font-family="Arial,sans-serif" font-size="14" font-weight="700">Ion Popescu</text>
+    <text x="112" y="249" fill="#FF5267" font-family="Arial,sans-serif" font-size="12">Mențiuni publice</text>
+    <text x="112" y="263" fill="#78889A" font-family="Arial,sans-serif" font-size="9">exemplu ilustrativ</text>
+  </g>
+  <g filter="url(#shadow)">
+    <path d="m399 80 72 30v74c0 54-29 94-72 119-43-25-72-65-72-119v-74l72-30Z" fill="url(#shield)" stroke="#FF8791" stroke-opacity=".75" stroke-width="2"/>
+    <path d="m399 97 55 23v64c0 40-20 72-55 94-35-22-55-54-55-94v-64l55-23Z" fill="#111820" stroke="#F75A6B" stroke-opacity=".55"/>
+    <path d="M382 192v-13a17 17 0 1 1 34 0v13" stroke="#FF6878" stroke-width="7" stroke-linecap="round"/>
+    <rect x="372" y="188" width="54" height="46" rx="10" fill="#F3273F"/>
+    <circle cx="399" cy="207" r="5" fill="#3B1119"/><path d="m399 211-3 10h6l-3-10Z" fill="#3B1119"/>
+  </g>
+  <path d="m343 328 231-6 35 37-243 12-46-26 23-17Z" fill="url(#laptop)" stroke="#394D5F"/>
+  <path d="m367 342 183-7 15 13-186 9-12-15Z" fill="#0A1118" stroke="#2A3948"/>
+  <path d="m397 353 78-3" stroke="#F3273F" stroke-opacity=".3" stroke-width="2"/>
+  <path d="m330 329 13-86 153 7 78 83" stroke="#324353" stroke-width="2"/>
+  <path d="m350 319 10-63 128 6 62 60" fill="#121C26" fill-opacity=".66" stroke="#34495C"/>
+</svg>
