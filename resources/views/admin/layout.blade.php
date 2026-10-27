@@ -26,7 +26,7 @@
             <form action="{{ route('admin.logout') }}" method="post">@csrf<button class="admin-button" type="submit">Ieșire</button></form>
         </div>
     </header>
-    <main class="admin-main {{ request()->routeIs('admin.articole.*') ? 'admin-articles-page' : '' }} {{ request()->routeIs('admin.sectiuni.*') ? 'admin-sections-page' : '' }}">
+    <main class="admin-main {{ request()->routeIs('admin.articole.*', 'admin.editorial.*', 'admin.sectiuni.*', 'admin.sfaturi.*', 'admin.google-indexing.*', 'admin.contact.*') ? 'admin-wide-page' : '' }}">
         <div class="admin-workspace">
             <aside class="admin-sidebar" aria-label="Arbore secțiuni și articole">
                 <label class="admin-tree-search-label" for="admin-tree-search">Caută în meniu</label>

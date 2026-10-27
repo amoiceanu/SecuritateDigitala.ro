@@ -55,6 +55,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::resource('sectiuni', AdminCategoryController::class)->except('show')->parameters(['sectiuni' => 'category']);
     Route::resource('sfaturi', AdminDailyTipController::class)->except('show')->parameters(['sfaturi' => 'dailyTip']);
     Route::resource('contact', AdminContactMessageController::class)->only(['index', 'show'])->parameters(['contact' => 'contactMessage']);
+    Route::delete('contact/{contactMessage}', [AdminContactMessageController::class, 'destroy'])->name('contact.destroy');
 });
 Route::view('/politica-de-confidentialitate', 'pages.privacy')->name('privacy');
 Route::view('/politica-cookies', 'pages.cookies')->name('cookies');

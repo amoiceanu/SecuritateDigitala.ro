@@ -6,7 +6,7 @@
         <h1>{{ $contactMessage->subject }}</h1>
         <p>Mesaj primit prin formularul public de contact.</p>
     </div>
-    <a class="admin-button" href="{{ route('admin.contact.index') }}"><i class="bi bi-arrow-left" aria-hidden="true"></i> Înapoi la mesaje</a>
+    <div class="admin-contact-detail-actions"><a class="admin-button" href="{{ route('admin.contact.index') }}"><i class="bi bi-arrow-left" aria-hidden="true"></i> Înapoi la mesaje</a><form method="post" action="{{ route('admin.contact.destroy', $contactMessage) }}" onsubmit="return confirm('Ștergi definitiv acest mesaj? Acțiunea nu poate fi anulată.');">@csrf @method('delete')<button class="admin-button danger" type="submit">Șterge mesajul</button></form></div>
 </div>
 
 <article class="admin-panel admin-contact-detail">

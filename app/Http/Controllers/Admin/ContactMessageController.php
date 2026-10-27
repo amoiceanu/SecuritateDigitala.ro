@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ContactMessage;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -29,5 +30,12 @@ class ContactMessageController extends Controller
     public function show(ContactMessage $contactMessage): View
     {
         return view('admin.contact.show', compact('contactMessage'));
+    }
+
+    public function destroy(ContactMessage $contactMessage): RedirectResponse
+    {
+        $contactMessage->delete();
+
+        return redirect()->route('admin.contact.index')->with('success', 'Mesajul a fost șters.');
     }
 }

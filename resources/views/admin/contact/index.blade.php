@@ -31,7 +31,7 @@
                     <time datetime="{{ $contactMessage->created_at->toIso8601String() }}">{{ $contactMessage->created_at->format('d.m.Y, H:i') }}</time>
                 </header>
                 <p class="admin-contact-body">{{ $contactMessage->message }}</p>
-                <footer><a class="admin-table-link" href="{{ route('admin.contact.show', $contactMessage) }}">Deschide mesajul <i class="bi bi-arrow-right" aria-hidden="true"></i></a></footer>
+                <footer class="admin-contact-card-actions"><a class="admin-table-link" href="{{ route('admin.contact.show', $contactMessage) }}">Deschide mesajul <i class="bi bi-arrow-right" aria-hidden="true"></i></a><form method="post" action="{{ route('admin.contact.destroy', $contactMessage) }}" onsubmit="return confirm('Ștergi definitiv acest mesaj? Acțiunea nu poate fi anulată.');">@csrf @method('delete')<button class="admin-button danger" type="submit">Șterge mesajul</button></form></footer>
             </article>
         @empty
             <p class="admin-contact-empty">{{ $search ? 'Nu am găsit mesaje pentru această căutare.' : 'Nu au fost primite mesaje.' }}</p>
