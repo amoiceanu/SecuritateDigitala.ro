@@ -1,4 +1,5 @@
 @use 'article-card-icons';
+@use 'article-media';
 @use 'daily-tip';
 @use 'contact-success';
 @use 'article-share';
@@ -23,3 +24,5 @@ $breakpoint-small: 400px;
 .admin-navigation{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:30px}.site-pages-table th{min-width:210px}.site-pages-table td{min-width:140px;vertical-align:middle}.site-toggle{display:flex;align-items:center;gap:9px;cursor:pointer}.site-toggle input{width:20px;height:20px;accent-color:var(--red)}.site-page-state{display:inline-block;color:#ff9ca7;font-size:11px;margin-top:6px}.site-pages-table strong{font-size:14px}
 
 @include exposure.styles;
+/* Language selector in the primary navigation */
+.language-switch{display:flex;align-items:center;gap:5px;margin-right:6px}.language-switch a{display:inline-flex;align-items:center;gap:4px;padding:6px 7px;border:1px solid transparent;border-radius:7px;color:var(--muted);font-size:10px;font-weight:800;line-height:1;text-decoration:none}.language-switch a:hover,.language-switch a[aria-current=page]{border-color:var(--line);background:var(--surface);color:var(--text)}.language-switch img{display:block;width:21px;height:14px;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px #ffffff22}@media(max-width:760px){.language-switch{margin:0}.language-switch a{padding:5px}.language-switch img{width:19px;height:13px}}

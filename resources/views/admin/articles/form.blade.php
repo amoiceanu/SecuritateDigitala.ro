@@ -2,6 +2,7 @@
 @section('title', ($article->exists ? 'Editează articol' : 'Articol nou').' — Administrare')
 @section('content')
 <div class="admin-heading"><div><h1>{{ $article->exists ? 'Editează articolul' : 'Articol nou' }}</h1><p>Drafturile sunt vizibile doar în administrare. Publicarea le face accesibile vizitatorilor.</p></div><a class="admin-button" href="{{ route('admin.articole.index') }}">Înapoi la articole</a></div>
+@if($article->exists)<p><a class="admin-button" href="{{ route('admin.articole.media.index', $article) }}">Gestionează imaginile articolului</a></p>@endif
 <section class="admin-panel">
     <form class="admin-form" method="post" action="{{ $article->exists ? route('admin.articole.update', $article) : route('admin.articole.store') }}">
         @csrf

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\DailyTip;
+use App\Models\MediaAsset;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
@@ -71,6 +72,8 @@ class ContentCatalogSeeder extends Seeder
                 }
             }
 
+            $this->seedMfaPhotography();
+
             DailyTip::firstOrCreate(['slug' => 'verifica-linkul-inainte-sa-te-autentifici'], [
                 'title' => 'Verifică linkul înainte să te autentifici',
                 'body' => 'Deschide serviciul din aplicația oficială sau tastează adresa cunoscută. Un link primit prin mesaj poate duce la o pagină falsă, chiar dacă arată ca site-ul real.',
@@ -80,6 +83,112 @@ class ContentCatalogSeeder extends Seeder
 
             Cache::forget('blog.categories');
         });
+    }
+
+    private function seedMfaPhotography(): void
+    {
+        $article = Article::where('slug', 'ce-este-autentificarea-multifactor-mfa')->first();
+        if (! $article) {
+            return;
+        }
+        if ($article->mediaPlacements()->exists() || $article->image === 'mfa/mfa-hero-1600.webp') {
+            return;
+        }
+
+        $photos = [
+            [
+                'sha256' => '2ea0ff6e9b33d1370dac1fd96241a3acd51b80dec189b4601efb7bec050fefb2',
+                'base' => 'mfa-hero', 'width' => 6144, 'height' => 3456, 'max' => 1600,
+                'source_url' => 'https://www.pexels.com/photo/person-holding-a-pen-and-a-smartphone-6278765/',
+                'photographer' => 'Artem Podrez',
+                'alt_text' => 'Mâini ținând un smartphone lângă un laptop pe un birou întunecat.',
+                'alt_text_en' => 'Hands holding a smartphone beside a laptop on a dark desk.',
+                'caption' => 'Fotografie ilustrativă; ecranul telefonului nu reprezintă un serviciu anume.',
+                'caption_en' => 'Illustrative photograph; the phone screen does not represent a specific service.',
+                'position' => 'hero', 'order' => 0, 'anchor_ro' => null, 'anchor_en' => null,
+            ],
+            [
+                'sha256' => 'd21e28674f30426a1f5cb06f1b5497e466d37accbc51222fd2a109b269119899',
+                'base' => 'mfa-definition', 'width' => 6720, 'height' => 4480, 'max' => 1600,
+                'source_url' => 'https://www.pexels.com/photo/close-up-of-hands-using-smart-phone-at-desk-10376030/',
+                'photographer' => 'RDNE Stock project',
+                'alt_text' => 'Persoană folosește un smartphone în timp ce lucrează la un laptop.',
+                'alt_text_en' => 'A person uses a smartphone while working on a laptop.',
+                'caption' => 'O autentificare poate implica dispozitive diferite; interfața din fotografie nu este un flux MFA.',
+                'caption_en' => 'Authentication can involve multiple devices; the interface shown is not an MFA flow.',
+                'position' => 'inline', 'order' => 1, 'anchor_ro' => 'Ce înseamnă MFA?', 'anchor_en' => 'What does MFA mean?',
+            ],
+            [
+                'sha256' => '501950d2933bb9d54b6f653536e7cbcab305542f77d6254ac7a8ebaddb3983b2',
+                'base' => 'mfa-methods', 'width' => 4096, 'height' => 2160, 'max' => 1600,
+                'source_url' => 'https://www.pexels.com/photo/a-person-holding-a-mobile-phone-12376016/',
+                'photographer' => "I'm Zion",
+                'alt_text' => 'Mână ținând un smartphone cu ecran de blocare și senzor de amprentă.',
+                'alt_text_en' => 'A hand holds a smartphone showing a lock screen and fingerprint sensor.',
+                'caption' => 'Biometria poate fi folosită local pentru a debloca un dispozitiv.',
+                'caption_en' => 'Biometrics can be used locally to unlock a device.',
+                'position' => 'inline', 'order' => 2, 'anchor_ro' => 'Tipuri de MFA și nivelul lor de protecție', 'anchor_en' => 'Types of MFA and their level of protection',
+            ],
+            [
+                'sha256' => '1af2aaa9ecfd2a21b12459bbdb4ff9e594434dcf02fe69d473a19daa943f1c6d',
+                'base' => 'mfa-passkey', 'width' => 4480, 'height' => 6720, 'max' => 1600,
+                'source_url' => 'https://www.pexels.com/photo/close-up-shot-of-a-laptop-5474301/',
+                'photographer' => 'cottonbro studio',
+                'alt_text' => 'Cheie fizică USB de securitate așezată lângă un laptop.',
+                'alt_text_en' => 'A physical USB security key beside a laptop.',
+                'caption' => 'Cheile de securitate compatibile cu FIDO/WebAuthn pot rezista phishingului.',
+                'caption_en' => 'FIDO/WebAuthn security keys can resist phishing.',
+                'position' => 'inline', 'order' => 3, 'anchor_ro' => 'Passkeys și chei de securitate', 'anchor_en' => 'Passkeys and security keys',
+            ],
+            [
+                'sha256' => 'a656b90cd45a25be0ee5b09938d5ff33ed9bf261464089a42c7147824ea9d89c',
+                'base' => 'mfa-setup', 'width' => 2696, 'height' => 4039, 'max' => 1200,
+                'source_url' => 'https://www.pexels.com/photo/person-using-electronics-and-clipboard-at-work-7989230/',
+                'photographer' => 'Mikhail Nilov',
+                'alt_text' => 'Persoană consultă un smartphone lângă un laptop și notițe de lucru.',
+                'alt_text_en' => 'A person checks a smartphone beside a laptop and work notes.',
+                'caption' => 'Păstrează codurile de recuperare într-un loc sigur, separat de telefon.',
+                'caption_en' => 'Keep recovery codes somewhere safe and separate from your phone.',
+                'position' => 'inline', 'order' => 4, 'anchor_ro' => 'Cum activezi MFA fără să te blochezi în afara contului', 'anchor_en' => 'How to enable MFA without locking yourself out of your account',
+            ],
+        ];
+
+        foreach ($photos as $photo) {
+            $variants = [];
+            foreach ([480, 768, 1200, 1600] as $width) {
+                if ($width > $photo['max']) {
+                    continue;
+                }
+                $variants[(string) $width] = 'images/articles/mfa/'.$photo['base'].'-'.$width.'.webp';
+            }
+
+            $asset = MediaAsset::firstOrCreate(['sha256' => $photo['sha256']], [
+                'file_path' => end($variants),
+                'variants' => $variants,
+                'mime_type' => 'image/webp',
+                'width' => $photo['width'],
+                'height' => $photo['height'],
+                'image_type' => 'photo',
+                'source_url' => $photo['source_url'],
+                'photographer' => $photo['photographer'],
+                'license_name' => 'Pexels License',
+                'license_url' => 'https://www.pexels.com/license/',
+            ]);
+
+            $article->mediaPlacements()->create([
+                'media_asset_id' => $asset->id,
+                'position' => $photo['position'],
+                'display_order' => $photo['order'],
+                'anchor_ro' => $photo['anchor_ro'],
+                'anchor_en' => $photo['anchor_en'],
+                'alt_text' => $photo['alt_text'],
+                'alt_text_en' => $photo['alt_text_en'],
+                'caption' => $photo['caption'],
+                'caption_en' => $photo['caption_en'],
+            ]);
+        }
+
+        $article->update(['image' => 'mfa/mfa-hero-1600.webp']);
     }
 
     private function renameAndMergeSections(): void

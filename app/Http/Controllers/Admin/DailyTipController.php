@@ -59,7 +59,9 @@ class DailyTipController extends Controller
     {
         $data = $request->validate([
             'title' => ['required', 'string', 'max:180'],
+            'title_en' => ['required', 'string', 'max:180'],
             'body' => ['required', 'string', 'max:3000'],
+            'body_en' => ['required', 'string', 'max:3000'],
             'status' => ['required', Rule::in(['draft', 'published'])],
             'published_at' => ['nullable', 'date'],
         ]);

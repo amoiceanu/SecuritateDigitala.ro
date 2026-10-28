@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Category;
 use App\Services\DailyTipService;
+use App\Support\LocalizedContent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\RedirectResponse;
@@ -19,7 +20,7 @@ class BlogController extends Controller
         return view('pages.home', ['articles' => $articles, 'featured' => $featured, 'categories' => $this->categories(), 'dailyTip' => $dailyTips->today()]);
     }
 
-    public function index(Request $request): View|RedirectResponse
+    public function index(Request $request, LocalizedContent $localizedContent): View|RedirectResponse
     {
         $categoryAliases = [
             'securitate-online' => 'securitate-dispozitive',
@@ -36,7 +37,23 @@ class BlogController extends Controller
         }
 
         $query = Article::with('category')->where('status', 'published')->whereDate('published_at', '<=', now())->latest('published_at');
-        if ($request->filled('q')) $query->where(fn ($q) => $q->where('title', 'like', '%'.$request->string('q')->toString().'%')->orWhere('excerpt', 'like', '%'.$request->string('q')->toString().'%'));
+        if ($request->filled('q')) {
+            $term = mb_strtolower($request->string('q')->toString());
+
+            if (app()->isLocale('en')) {
+                $matchingIds = Article::with('category')->where('status', 'published')->whereDate('published_at', '<=', now())
+                    ->get(['id', 'slug', 'title', 'excerpt', 'category_id'])
+                    ->filter(function (Article $article) use ($localizedContent, $term): bool {
+                        $translated = $localizedContent->article($article);
+
+                        return str_contains(mb_strtolower($translated['title']), $term)
+                            || str_contains(mb_strtolower($translated['excerpt']), $term);
+                    })->modelKeys();
+                $query->whereIn('id', $matchingIds);
+            } else {
+                $query->where(fn ($q) => $q->where('title', 'like', '%'.$request->string('q')->toString().'%')->orWhere('excerpt', 'like', '%'.$request->string('q')->toString().'%'));
+            }
+        }
         if ($request->filled('categorie')) $query->whereHas('category', fn ($q) => $q->where('slug', $request->string('categorie')->toString()));
         return view('pages.articles', ['articles' => $query->paginate(9)->withQueryString(), 'categories' => $this->categories()]);
     }

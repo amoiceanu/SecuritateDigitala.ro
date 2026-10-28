@@ -1,25 +1,25 @@
 <!doctype html>
-<html lang="ro">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'Securitate Digitală — Protejează-ți viața online.')</title>
-    <meta name="description" content="@yield('description', 'Securitate Digitală oferă ghiduri practice despre protecția datelor personale, phishing, fraude online, parole, autentificare și siguranță digitală.')">
+    <title>@yield('title', 'Securitate Digitală — '.__('Protejează-ți viața online.'))</title>
+    <meta name="description" content="@yield('description', __('Securitate Digitală oferă ghiduri practice despre protecția datelor personale, phishing, fraude online, parole, autentificare și siguranță digitală.'))">
     @hasSection('robots')<meta name="robots" content="@yield('robots')">@endif
     <link rel="canonical" href="@yield('canonical', 'https://securitatedigitala.ro'.(request()->getPathInfo() === '/' ? '/' : request()->getPathInfo()))">
     <link rel="icon" type="image/svg+xml" href="{{ asset('images/securitate-digitala-icon.svg') }}">
     <meta property="og:site_name" content="Securitate Digitală">
-    <meta property="og:title" content="@yield('title', 'Securitate Digitală — Protejează-ți viața online.')">
-    <meta property="og:description" content="@yield('description', 'Securitate Digitală oferă ghiduri practice despre protecția datelor personale, phishing, fraude online, parole, autentificare și siguranță digitală.')">
+    <meta property="og:title" content="@yield('title', 'Securitate Digitală — '.__('Protejează-ți viața online.'))">
+    <meta property="og:description" content="@yield('description', __('Securitate Digitală oferă ghiduri practice despre protecția datelor personale, phishing, fraude online, parole, autentificare și siguranță digitală.'))">
     <meta property="og:url" content="https://securitatedigitala.ro{{ request()->getPathInfo() === '/' ? '' : request()->getPathInfo() }}">
     <meta property="og:image" content="@yield('og_image', asset('images/articles/password-security.svg'))">
     <meta property="og:type" content="@yield('og_type', 'website')">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="@yield('og_image', asset('images/articles/password-security.svg'))">
-    <meta name="twitter:title" content="@yield('title', 'Securitate Digitală — Protejează-ți viața online.')">
-    <meta name="twitter:description" content="@yield('description', 'Securitate Digitală oferă ghiduri practice despre protecția datelor personale, phishing, fraude online, parole, autentificare și siguranță digitală.')">
+    <meta name="twitter:title" content="@yield('title', 'Securitate Digitală — '.__('Protejează-ți viața online.'))">
+    <meta name="twitter:description" content="@yield('description', __('Securitate Digitală oferă ghiduri practice despre protecția datelor personale, phishing, fraude online, parole, autentificare și siguranță digitală.'))">
     <script type="application/ld+json">{!! json_encode(['@context' => 'https://schema.org', '@type' => 'Organization', 'name' => 'Securitate Digitală', 'url' => 'https://securitatedigitala.ro', 'logo' => 'https://securitatedigitala.ro/images/securitate-digitala-icon.svg'], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
-    <script type="application/ld+json">{!! json_encode(['@context' => 'https://schema.org', '@type' => 'WebSite', 'name' => 'Securitate Digitală', 'url' => 'https://securitatedigitala.ro', 'description' => 'Protejează-ți viața online.'], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
+    <script type="application/ld+json">{!! json_encode(['@context' => 'https://schema.org', '@type' => 'WebSite', 'name' => 'Securitate Digitală', 'url' => 'https://securitatedigitala.ro', 'description' => __('Protejează-ți viața online.')], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -27,23 +27,23 @@
     @stack('head')
 </head>
 <body>
-    <a class="skip-link" href="#main">Sari la conținut</a>
+    <a class="skip-link" href="#main">{{ __('Sari la conținut') }}</a>
     <x-navbar />
     <main id="main">@yield('content')</main>
     <x-footer />
     <div class="search-overlay" aria-hidden="true">
-        <button class="search-close icon-button" aria-label="Închide căutarea"><i class="bi bi-x-lg"></i></button>
+        <button class="search-close icon-button" aria-label="{{ __('Închide căutarea') }}"><i class="bi bi-x-lg"></i></button>
         <form action="{{ route('articles.index') }}" method="get">
-            <label for="overlaySearch">Caută în Securitate Digitală</label>
+            <label for="overlaySearch">{{ __('Caută în Securitate Digitală') }}</label>
             <div>
-                <input id="overlaySearch" name="q" type="search" placeholder="Caută articole..." required>
-                <button class="btn btn-primary" type="submit" aria-label="Caută"><i class="bi bi-search"></i></button>
+                <input id="overlaySearch" name="q" type="search" placeholder="{{ __('Caută articole...') }}" required>
+                <button class="btn btn-primary" type="submit" aria-label="{{ __('Caută') }}"><i class="bi bi-search"></i></button>
             </div>
         </form>
     </div>
     <div class="cookie-notice" hidden>
-        <p>Acest site folosește doar cookie-uri strict necesare funcționării. Nu folosim cookie-uri de analiză sau publicitate. <a href="{{ route('cookies') }}">Detalii</a></p>
-        <button type="button" class="btn btn-outline-light cookie-accept">Am înțeles</button>
+        <p>{{ __('Acest site folosește doar cookie-uri strict necesare funcționării. Nu folosim cookie-uri de analiză sau publicitate. ') }}<a href="{{ route('cookies') }}">{{ __('Detalii') }}</a></p>
+        <button type="button" class="btn btn-outline-light cookie-accept">{{ __('Am înțeles') }}</button>
     </div>
     @stack('scripts')
 </body>

@@ -4,9 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
+    protected $with = ['heroMedia.asset'];
+
     protected $fillable = ['editorial_date', 'access_type', 'editorial_key', 'category_id', 'title', 'slug', 'excerpt', 'content', 'image', 'author', 'published_at', 'reading_time', 'is_featured', 'status', 'seo_title', 'meta_description', 'focus_keyword', 'secondary_keywords'];
 
     protected function casts(): array
@@ -17,6 +22,36 @@ class Article extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function mediaPlacements(): HasMany
+    {
+        return $this->hasMany(ArticleMediaPlacement::class)->orderBy('display_order');
+    }
+
+    public function heroMedia(): HasOne
+    {
+        return $this->hasOne(ArticleMediaPlacement::class)->where('position', 'hero');
+    }
+
+    public function getImageUrlAttribute(): string
+    {
+        if ($this->heroMedia?->asset) {
+            return $this->heroMedia->asset->url;
+        }
+
+        if (! filled($this->image)) {
+            return asset('images/articles/editorial-cover.svg');
+        }
+
+        return str_starts_with($this->image, 'storage/')
+            ? asset($this->image)
+            : asset('images/articles/'.$this->image);
+    }
+
+    public function getImageSrcsetAttribute(): ?string
+    {
+        return $this->heroMedia?->asset?->srcset;
     }
 
     public function getImageAltAttribute(): string

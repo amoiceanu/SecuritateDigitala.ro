@@ -46,6 +46,7 @@ class SitePages
         $links = [];
         foreach ($keys as $key) {
             if (isset($pages[$key]) && $pages[$key]['available'] && $pages[$key]['menu'] && isset($pages[$key]['route'])) {
+                $pages[$key]['nav_label'] = __($pages[$key]['nav_label']);
                 $links[$key] = $pages[$key];
             }
         }

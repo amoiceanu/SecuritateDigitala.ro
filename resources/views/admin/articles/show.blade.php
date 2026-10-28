@@ -6,7 +6,7 @@
     <div class="admin-preview-meta"><span class="admin-badge {{ $article->status === 'draft' ? 'draft' : ($article->published_at?->isFuture() ? 'scheduled' : 'published') }}">{{ $article->status === 'draft' ? 'Draft' : ($article->published_at?->isFuture() ? 'Programat' : 'Publicat') }}</span><span>{{ $article->category->name }}</span><span>{{ $article->published_at?->format('d.m.Y') ?? 'Fără dată de publicare' }}</span><span>{{ $article->reading_time }} min citire</span></div>
     <h1>{{ $article->title }}</h1>
     <p class="admin-preview-excerpt">{{ $article->excerpt }}</p>
-    @if($article->image)<img class="admin-preview-image" src="{{ asset('images/articles/'.$article->image) }}" alt="Imagine pentru {{ $article->title }}" onerror="this.hidden=true">@endif
+    @if($article->image)<img class="admin-preview-image" src="{{ $article->image_url }}" alt="Imagine pentru {{ $article->title }}" onerror="this.hidden=true">@endif
     <div class="admin-preview-content">{!! $article->content !!}</div>
 </article>
 <div class="admin-preview-footer"><a class="admin-button primary" href="{{ route('admin.articole.edit', $article) }}"><i class="bi bi-pencil-square" aria-hidden="true"></i> Editează articolul</a></div>

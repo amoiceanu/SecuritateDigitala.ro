@@ -5,35 +5,35 @@
                 <i class="bi bi-shield-lock-fill" aria-hidden="true"></i>
                 <span>Securitate <b>Digitală</b></span>
             </a>
-            <p>Protejează-ți viața online.</p>
+            <p>{{ __('Protejează-ți viața online.') }}</p>
             <a href="https://securitatedigitala.ro">securitatedigitala.ro</a>
         </div>
         <div>
-            <h2>Navigare</h2>
-            <a href="{{ route('home') }}">Home</a>
-            @if(app(\App\Services\SitePages::class)->visible('articles'))<a href="{{ route('articles.index') }}">Articole</a>@endif
-            <a href="{{ route('home') }}#sfatul-zilei">Sfatul zilei</a>
-            @if(app(\App\Services\SitePages::class)->visible('guides'))<a href="{{ route('articles.index', ['categorie' => 'ghiduri-practice']) }}">Ghiduri</a>@endif
-            @if(app(\App\Services\SitePages::class)->visible('exposure'))<a href="{{ route('exposure.index') }}">Verifică datele</a>@endif
-            @if(app(\App\Services\SitePages::class)->visible('about'))<a href="{{ route('about') }}">Despre</a>@endif
-            @if(app(\App\Services\SitePages::class)->visible('contact'))<a href="{{ route('contact') }}">Contact</a>@endif
+            <h2>{{ __('Navigare') }}</h2>
+            <a href="{{ route('home') }}">{{ __('Home') }}</a>
+            @if(app(\App\Services\SitePages::class)->visible('articles'))<a href="{{ route('articles.index') }}">{{ __('Articole') }}</a>@endif
+            <a href="{{ route('home') }}#sfatul-zilei">{{ __('Sfatul zilei') }}</a>
+            @if(app(\App\Services\SitePages::class)->visible('guides'))<a href="{{ route('articles.index', ['categorie' => 'ghiduri-practice']) }}">{{ __('Ghiduri') }}</a>@endif
+            @if(app(\App\Services\SitePages::class)->visible('exposure'))<a href="{{ route('exposure.index') }}">{{ __('Verifică datele') }}</a>@endif
+            @if(app(\App\Services\SitePages::class)->visible('about'))<a href="{{ route('about') }}">{{ __('Despre') }}</a>@endif
+            @if(app(\App\Services\SitePages::class)->visible('contact'))<a href="{{ route('contact') }}">{{ __('Contact') }}</a>@endif
         </div>
         @if(app(\App\Services\SitePages::class)->visible('articles'))<div>
-            <h2>Categorii</h2>
-            <a href="{{ route('articles.index', ['categorie' => 'securitate-online']) }}">Securitate online</a>
+            <h2>{{ __('Categorii') }}</h2>
+            <a href="{{ route('articles.index', ['categorie' => 'securitate-online']) }}">{{ __('Securitate online') }}</a>
             <a href="{{ route('articles.index', ['categorie' => 'phishing']) }}">Phishing</a>
-            <a href="{{ route('articles.index', ['categorie' => 'date-personale']) }}">Date personale</a>
+            <a href="{{ route('articles.index', ['categorie' => 'date-personale']) }}">{{ __('Date personale') }}</a>
         </div>@endif
         <div>
-            <h2>Informații</h2>
-            <a href="{{ route('terms') }}">Termeni și condiții</a>
-            @if(app(\App\Services\SitePages::class)->visible('privacy'))<a href="{{ route('privacy') }}">Politica de confidențialitate</a>@endif
-            @if(app(\App\Services\SitePages::class)->visible('cookies'))<a href="{{ route('cookies') }}">Politica cookies</a>@endif
-            @if(app(\App\Services\SitePages::class)->visible('contact'))<a href="{{ route('contact') }}">Contact și solicitări</a>@endif
+            <h2>{{ __('Informații') }}</h2>
+            <a href="{{ route('terms') }}">{{ __('Termeni și condiții') }}</a>
+            @if(app(\App\Services\SitePages::class)->visible('privacy'))<a href="{{ route('privacy') }}">{{ __('Politica de confidențialitate') }}</a>@endif
+            @if(app(\App\Services\SitePages::class)->visible('cookies'))<a href="{{ route('cookies') }}">{{ __('Politica cookies') }}</a>@endif
+            @if(app(\App\Services\SitePages::class)->visible('contact'))<a href="{{ route('contact') }}">{{ __('Contact și solicitări') }}</a>@endif
         </div>
     </div>
     <div class="container footer-bottom">
-        <p>© {{ now()->year }} Securitate Digitală. Toate drepturile rezervate.</p>
-        <p>Conținut educativ și informativ. Nu reprezintă consultanță juridică sau de securitate informatică personalizată.</p>
+        <p>© {{ now()->year }} Securitate Digitală. {{ __('Toate drepturile rezervate.') }}</p>
+        <p>{{ __('Conținut educativ și informativ. Nu reprezintă consultanță juridică sau de securitate informatică personalizată.') }}</p>
     </div>
 </footer>

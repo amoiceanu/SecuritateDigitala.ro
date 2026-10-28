@@ -1,2 +1,3 @@
 @props(['category'])
-<a class="category-badge" href="{{ route('articles.index', ['categorie' => $category->slug]) }}">{{ $category->name }}</a>
+@php($localizedCategory = app(\App\Support\LocalizedContent::class)->category($category))
+<a class="category-badge" href="{{ route('articles.index', ['categorie' => $category->slug]) }}">{{ $localizedCategory['name'] }}</a>

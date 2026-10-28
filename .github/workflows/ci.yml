@@ -205,6 +205,7 @@ jobs:
           tar -xzf "$ASSET_ARCHIVE" -C public/build
           rm "$ASSET_ARCHIVE"
           php artisan migrate --force
+          php artisan storage:link
           php artisan db:seed --class=ContentCatalogSeeder --force
           php artisan editorial:seed
           php artisan article:publish-black-friday

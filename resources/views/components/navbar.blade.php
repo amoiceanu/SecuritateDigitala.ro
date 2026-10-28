@@ -1,6 +1,6 @@
 @php($sitePages = app(\App\Services\SitePages::class))
 <header class="site-header">
-    <nav class="navbar container" aria-label="Navigare principală">
+    <nav class="navbar container" aria-label="{{ __('Navigare') }}">
         <a class="brand" href="{{ route('home') }}" aria-label="Securitate Digitală">
             <i class="bi bi-shield-lock-fill" aria-hidden="true"></i>
             <span>Securitate <b>Digitală</b></span>
@@ -18,8 +18,12 @@
             @endforeach
         </div>
         <div class="nav-tools">
-            @if($sitePages->enabled('articles'))<button class="icon-button search-toggle" aria-label="Caută articole" type="button"><i class="bi bi-search" aria-hidden="true"></i></button>@endif
-            <button class="icon-button menu-toggle" aria-label="Deschide meniul" aria-expanded="false" aria-controls="navLinks" type="button"><i class="bi bi-list" aria-hidden="true"></i></button>
+            <div class="language-switch" aria-label="{{ __('Language') }}">
+                <a href="{{ route('locale.switch', 'en') }}" lang="en" hreflang="en" aria-label="English" title="English" @if(app()->isLocale('en')) aria-current="page" @endif><img src="{{ asset('images/flags/gb.svg') }}" alt=""><span>EN</span></a>
+                <a href="{{ route('locale.switch', 'ro') }}" lang="ro" hreflang="ro" aria-label="Română" title="Română" @if(app()->isLocale('ro')) aria-current="page" @endif><img src="{{ asset('images/flags/ro.svg') }}" alt=""><span>RO</span></a>
+            </div>
+            @if($sitePages->enabled('articles'))<button class="icon-button search-toggle" aria-label="{{ __('Caută articole') }}" type="button"><i class="bi bi-search" aria-hidden="true"></i></button>@endif
+            <button class="icon-button menu-toggle" aria-label="{{ __('Deschide meniul') }}" data-label-open="{{ __('Deschide meniul') }}" data-label-close="{{ __('Închide meniul') }}" aria-expanded="false" aria-controls="navLinks" type="button"><i class="bi bi-list" aria-hidden="true"></i></button>
         </div>
     </nav>
 </header>

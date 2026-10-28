@@ -6,7 +6,9 @@
     @csrf @if($dailyTip->exists) @method('put') @endif
     <div class="admin-form-grid">
         <div class="admin-field full"><label for="title">Titlu scurt</label><input id="title" name="title" value="{{ old('title', $dailyTip->title) }}" maxlength="180" required></div>
+        <div class="admin-field full"><label for="title_en">English title</label><input id="title_en" name="title_en" value="{{ old('title_en', $dailyTip->title_en) }}" maxlength="180" required></div>
         <div class="admin-field full"><label for="body">Sfat</label><textarea id="body" name="body" rows="5" maxlength="3000" required>{{ old('body', $dailyTip->body) }}</textarea><small>Textul va fi afișat ca text simplu pe prima pagină.</small></div>
+        <div class="admin-field full"><label for="body_en">English tip</label><textarea id="body_en" name="body_en" rows="5" maxlength="3000" required>{{ old('body_en', $dailyTip->body_en) }}</textarea></div>
         <div class="admin-field"><label for="status">Stare</label><select id="status" name="status" required><option value="draft" @selected(old('status', $dailyTip->status) === 'draft')>Draft</option><option value="published" @selected(old('status', $dailyTip->status) === 'published')>Publicat</option></select></div>
         <div class="admin-field"><label for="published_at">Data publicării</label><input id="published_at" name="published_at" type="date" value="{{ old('published_at', $dailyTip->published_at?->format('Y-m-d')) }}"><small>O dată viitoare programează sfatul.</small></div>
     </div>

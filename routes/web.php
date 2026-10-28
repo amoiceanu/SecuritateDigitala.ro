@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\Admin\ArticleMediaController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\ContactMessageController as AdminContactMessageController;
 use App\Http\Controllers\Admin\DailyTipController as AdminDailyTipController;
@@ -29,6 +30,17 @@ Route::get('/articole/{article:slug}', [BlogController::class, 'show'])->name('a
 Route::view('/despre', 'pages.about')->name('about');
 Route::get('/contact', [ContactController::class, 'create'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:5,1')->name('contact.store');
+Route::get('/language/{locale}', function (\Illuminate\Http\Request $request, string $locale) {
+    abort_unless(in_array($locale, ['ro', 'en'], true), 404);
+    $request->session()->put('site_locale', $locale);
+
+    $referer = $request->headers->get('referer');
+    if ($referer && parse_url($referer, PHP_URL_HOST) === $request->getHost()) {
+        return redirect()->to($referer);
+    }
+
+    return redirect()->route('home');
+})->name('locale.switch');
 Route::get('/admin/login', [AdminAuthController::class, 'create'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'store'])->middleware('throttle:5,1')->name('admin.login.store');
 Route::post('/admin/logout', [AdminAuthController::class, 'destroy'])->middleware('auth')->name('admin.logout');
@@ -51,6 +63,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('google-indexing/export.csv', [GoogleIndexingController::class, 'export'])->name('google-indexing.export');
     Route::get('calendar-editorial', [\App\Http\Controllers\Admin\EditorialCalendarController::class, 'index'])->name('editorial.index');
     Route::resource('articole', AdminArticleController::class)->except('show')->parameters(['articole' => 'article']);
+    Route::get('articole/{article}/imagini', [ArticleMediaController::class, 'index'])->name('articole.media.index');
+    Route::post('articole/{article}/imagini', [ArticleMediaController::class, 'store'])->name('articole.media.store');
+    Route::put('articole/{article}/imagini/{placement}', [ArticleMediaController::class, 'update'])->name('articole.media.update');
+    Route::delete('articole/{article}/imagini/{placement}', [ArticleMediaController::class, 'destroy'])->name('articole.media.destroy');
     Route::get('articole/{article}', [AdminArticleController::class, 'show'])->name('articole.show');
     Route::resource('sectiuni', AdminCategoryController::class)->except('show')->parameters(['sectiuni' => 'category']);
     Route::resource('sfaturi', AdminDailyTipController::class)->except('show')->parameters(['sfaturi' => 'dailyTip']);

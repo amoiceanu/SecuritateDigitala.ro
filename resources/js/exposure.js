@@ -35,7 +35,7 @@ document.querySelectorAll('[data-email-check]').forEach(form => {
  const providerReady = form.dataset.providerReady === 'true';
  const update = () => {
   if (error && !email.validity.valid && email.value) {
-   error.textContent = email.validity.typeMismatch ? 'Introdu o adresă de e-mail validă.' : 'Verifică adresa de e-mail introdusă.';
+   error.textContent = email.validity.typeMismatch ? form.dataset.invalidEmail : form.dataset.invalidAddress;
    error.hidden = false;
   } else if (error && (!email.value || email.validity.valid)) {
    error.textContent = '';
@@ -61,9 +61,9 @@ document.querySelectorAll('[data-public-search]').forEach(form => {
  form.querySelectorAll('[name=match_type]').forEach(radio => radio.addEventListener('change', () => {
   const email = form.querySelector('[name=match_type]:checked').value === 'email';
   const input = form.querySelector('[name=subject]');
-  input.type = email ? 'email' : 'text'; input.value = ''; input.placeholder = email ? 'nume@exemplu.ro' : 'Numele și prenumele';
-  form.querySelector('[data-subject-label]').textContent = email ? 'Adresa ta de e-mail' : 'Nume complet';
-  form.querySelector('[data-own-label]').textContent = email ? 'Verific propria adresă de e-mail.' : 'Confirm că verific propriile date.';
+  input.type = email ? 'email' : 'text'; input.value = ''; input.placeholder = email ? 'nume@exemplu.ro' : form.dataset.namePlaceholder;
+  form.querySelector('[data-subject-label]').textContent = email ? form.dataset.emailLabel : form.dataset.nameLabel;
+  form.querySelector('[data-own-label]').textContent = email ? form.dataset.ownEmailLabel : form.dataset.ownNameLabel;
   form.querySelector('[data-location]').hidden = email;
   form.querySelector('[name=location]').disabled = email;
   updateButton();
@@ -72,7 +72,7 @@ document.querySelectorAll('[data-public-search]').forEach(form => {
 });
 document.querySelectorAll('[data-processing-form]').forEach(form => form.addEventListener('submit', () => {
  const button = form.querySelector('button[type=submit],button:not([type])');
- if (button) { button.disabled = true; button.innerHTML = '<span class="exposure-spinner" aria-hidden="true"></span><span>Se procesează…</span>'; button.setAttribute('aria-live', 'polite'); }
+ if (button) { button.disabled = true; button.innerHTML = `<span class="exposure-spinner" aria-hidden="true"></span><span>${form.dataset.processingText}</span>`; button.setAttribute('aria-live', 'polite'); }
 }));
 const status = document.querySelector('[data-exposure-status]');
 if (status) {
@@ -81,10 +81,10 @@ if (status) {
   if (stopped) return;
   try {
    const response = await fetch(status.dataset.exposureStatus, {headers:{Accept:'application/json'}, cache:'no-store', credentials:'same-origin'});
-   if (!response.ok) { stopped = true; status.textContent = 'Statusul nu mai este disponibil. Raportul poate fi expirat sau sesiunea s-a încheiat.'; return; }
+   if (!response.ok) { stopped = true; status.textContent = status.dataset.unavailableText; return; }
    const data = await response.json();
    if (data.state !== status.dataset.initialState) { stopped = true; window.location.reload(); return; }
-  } catch { status.textContent = 'Conexiunea pentru actualizare este indisponibilă. Încercăm din nou; acest mesaj nu reprezintă un rezultat negativ.'; }
+  } catch { status.textContent = status.dataset.connectionErrorText; }
   window.setTimeout(poll, 5000);
  };
  window.setTimeout(poll, 5000);

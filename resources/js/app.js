@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     menu?.addEventListener('click', () => {
         const open = nav.classList.toggle('open');
         menu.setAttribute('aria-expanded', String(open));
-        menu.setAttribute('aria-label', open ? 'Închide meniul' : 'Deschide meniul');
+        menu.setAttribute('aria-label', open ? menu.dataset.labelClose : menu.dataset.labelOpen);
         menu.innerHTML = `<i class="bi ${open ? 'bi-x-lg' : 'bi-list'}" aria-hidden="true"></i>`;
     });
 

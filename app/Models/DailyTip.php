@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DailyTip extends Model
 {
-    protected $fillable = ['title', 'slug', 'body', 'status', 'published_at'];
+    protected $fillable = ['title', 'title_en', 'slug', 'body', 'body_en', 'status', 'published_at'];
 
     protected function casts(): array
     {

@@ -16,7 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
         $middleware->alias(['admin' => EnsureUserIsAdmin::class]);
-        $middleware->web(append: [RedirectCanonicalDomain::class, SiteAvailability::class]);
+        $middleware->web(append: [\App\Http\Middleware\ResolvePublicLocale::class, RedirectCanonicalDomain::class, SiteAvailability::class]);
         $middleware->redirectGuestsTo(fn () => route('admin.login'));
     })
     ->withExceptions(function (Exceptions $exceptions) {
