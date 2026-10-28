@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @php($localizedArticle = app(\App\Support\LocalizedContent::class)->article($article))
-@section('title', $localizedArticle['seo_title'].' — Securitate Digitală')
-@section('description', $localizedArticle['meta_description'])
-@section('og_type', 'article')
 @php
     $coverIcon = $article->cover_icon;
     $heroMedia = $article->heroMedia;
     $articleOgImage = $heroMedia?->asset?->url ?? $article->image_url;
 @endphp
+@section('title', $localizedArticle['seo_title'].' — Securitate Digitală')
+@section('description', $localizedArticle['meta_description'])
+@section('og_type', 'article')
 @section('og_image', $articleOgImage)
 @push('head')
 @if($article->focus_keyword || $article->secondary_keywords)<meta name="keywords" content="{{ implode(', ', array_filter([$article->focus_keyword, ...($article->secondary_keywords ?? [])])) }}">@endif

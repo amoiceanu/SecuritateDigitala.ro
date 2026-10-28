@@ -16,7 +16,11 @@ class ResolvePublicLocale
             return $next($request);
         }
 
-        $locale = $request->session()->get('site_locale');
+        // Stateless endpoints (robots.txt, sitemap.xml) intentionally remove
+        // StartSession. Keep locale resolution safe for those requests and tests.
+        $locale = $request->hasSession()
+            ? $request->session()->get('site_locale')
+            : null;
 
         if (! in_array($locale, ['ro', 'en'], true)) {
             $country = strtoupper((string) (
