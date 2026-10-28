@@ -58,12 +58,17 @@ class BlogController extends Controller
         return view('pages.articles', ['articles' => $query->paginate(9)->withQueryString(), 'categories' => $this->categories()]);
     }
 
-    public function show(Article $article): View
+    public function show(Article $article, LocalizedContent $localizedContent): View
     {
         abort_unless($article->status === 'published' && $article->published_at && ! $article->published_at->isFuture(), 404);
         $article->load('category');
         $recommended = Article::with('category')->where('status', 'published')->whereDate('published_at', '<=', now())->whereKeyNot($article->id)->latest('published_at')->take(3)->get();
-        return view('pages.article', compact('article', 'recommended'));
+        $localizedArticle = $localizedContent->article($article);
+        $heroMedia = $article->heroMedia;
+        $articleOgImage = $heroMedia?->asset?->url ?? $article->image_url;
+        $coverIcon = $article->cover_icon;
+
+        return view('pages.article', compact('article', 'recommended', 'localizedArticle', 'heroMedia', 'articleOgImage', 'coverIcon'));
     }
 
     private function categories()

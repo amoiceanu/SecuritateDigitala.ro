@@ -1,10 +1,4 @@
 @extends('layouts.app')
-@php($localizedArticle = app(\App\Support\LocalizedContent::class)->article($article))
-@php
-    $coverIcon = $article->cover_icon;
-    $heroMedia = $article->heroMedia;
-    $articleOgImage = $heroMedia?->asset?->url ?? $article->image_url;
-@endphp
 @section('title', $localizedArticle['seo_title'].' — Securitate Digitală')
 @section('description', $localizedArticle['meta_description'])
 @section('og_type', 'article')
