@@ -73,6 +73,7 @@ class ContentCatalogSeeder extends Seeder
             }
 
             $this->seedMfaPhotography();
+            $this->call(StockArticleCoverSeeder::class);
 
             DailyTip::firstOrCreate(['slug' => 'verifica-linkul-inainte-sa-te-autentifici'], [
                 'title' => 'Verifică linkul înainte să te autentifici',

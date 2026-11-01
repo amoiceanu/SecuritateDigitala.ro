@@ -56,6 +56,12 @@ class Article extends Model
 
     public function getImageAltAttribute(): string
     {
+        if ($this->heroMedia) {
+            return app()->getLocale() === 'en' && filled($this->heroMedia->alt_text_en)
+                ? $this->heroMedia->alt_text_en
+                : $this->heroMedia->alt_text;
+        }
+
         return match ($this->image) {
             'cont-facebook-instagram-spart.jpg' => 'Telefon cu alerte de conectare neobișnuită, lacăt roșu și scut de securitate',
             'telefon-microfon-privacy.jpg' => 'Telefon cu indicator de microfon, semnale de publicitate și scut roșu pentru confidențialitate',
