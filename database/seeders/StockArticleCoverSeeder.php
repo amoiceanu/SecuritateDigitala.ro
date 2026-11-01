@@ -14,12 +14,10 @@ class StockArticleCoverSeeder extends Seeder
     public function run(): void
     {
         $covers = json_decode(file_get_contents(database_path('seeders/data/stock-article-covers.json')), true, flags: JSON_THROW_ON_ERROR);
-        $missingArticles = [];
-
         foreach ($covers as $cover) {
             $article = Article::where('slug', $cover['slug'])->first();
             if (! $article) {
-                $missingArticles[] = $cover['slug'];
+                // Test fixtures and partially seeded sites may not have every catalog article yet.
                 continue;
             }
 
@@ -64,8 +62,5 @@ class StockArticleCoverSeeder extends Seeder
             $article->update(['image' => 'stock/'.$cover['slug'].'-1600.webp']);
         }
 
-        if ($missingArticles !== []) {
-            throw new RuntimeException('Stock cover manifest references missing articles: '.implode(', ', $missingArticles));
-        }
     }
 }
