@@ -9,7 +9,7 @@ use RuntimeException;
 
 class StockArticleCoverSeeder extends Seeder
 {
-    private const WIDTHS = [480, 768, 1200, 1600];
+    private const WIDTHS = [480, 768, 1200, 1280, 1600];
 
     public function run(): void
     {
@@ -35,13 +35,13 @@ class StockArticleCoverSeeder extends Seeder
                 $variants[(string) $width] = $path;
             }
 
-            $filePath = $variants['1600'];
+            $filePath = $variants['1280'];
             $asset = MediaAsset::firstOrCreate(['sha256' => hash_file('sha256', public_path($filePath))], [
                 'file_path' => $filePath,
                 'variants' => $variants,
                 'mime_type' => 'image/webp',
-                'width' => 1600,
-                'height' => 900,
+                'width' => 1280,
+                'height' => 720,
                 'image_type' => 'photo',
                 'source_url' => "https://www.pexels.com/photo/{$cover['photo_slug']}/",
                 'photographer' => $cover['photographer'],
@@ -59,7 +59,7 @@ class StockArticleCoverSeeder extends Seeder
                 'caption_en' => 'Illustrative photograph. Credit: '.$cover['photographer'].' / Pexels.',
             ]);
 
-            $article->update(['image' => 'stock/'.$cover['slug'].'-1600.webp']);
+            $article->update(['image' => 'stock/'.$cover['slug'].'-1280.webp']);
         }
 
     }
