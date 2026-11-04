@@ -22,8 +22,8 @@
                 <a href="{{ route('locale.switch', 'en') }}" lang="en" hreflang="en" aria-label="English" title="English" @if(app()->isLocale('en')) aria-current="page" @endif><img src="{{ asset('images/flags/gb.svg') }}" alt=""><span>EN</span></a>
                 <a href="{{ route('locale.switch', 'ro') }}" lang="ro" hreflang="ro" aria-label="Română" title="Română" @if(app()->isLocale('ro')) aria-current="page" @endif><img src="{{ asset('images/flags/ro.svg') }}" alt=""><span>RO</span></a>
             </div>
-            @if($sitePages->enabled('articles'))<button class="icon-button search-toggle" aria-label="{{ __('Caută articole') }}" type="button"><i class="bi bi-search" aria-hidden="true"></i></button>@endif
-            <button class="icon-button menu-toggle" aria-label="{{ __('Deschide meniul') }}" data-label-open="{{ __('Deschide meniul') }}" data-label-close="{{ __('Închide meniul') }}" aria-expanded="false" aria-controls="navLinks" type="button"><i class="bi bi-list" aria-hidden="true"></i></button>
+            @if($sitePages->enabled('articles'))<button class="icon-button search-toggle btn btn-outline-primary" aria-label="{{ __('Caută articole') }}" type="button"><i class="bi bi-search" aria-hidden="true"></i></button>@endif
+            <button class="icon-button menu-toggle btn btn-outline-primary" aria-label="{{ __('Deschide meniul') }}" data-label-open="{{ __('Deschide meniul') }}" data-label-close="{{ __('Închide meniul') }}" aria-expanded="false" aria-controls="navLinks" type="button"><i class="bi bi-list" aria-hidden="true"></i></button>
         </div>
     </nav>
 </header>

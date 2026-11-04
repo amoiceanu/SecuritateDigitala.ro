@@ -21,7 +21,7 @@
 @section('content')
 <section class="article-hero container">
     <div class="article-hero-copy">
-        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="{{ route('home') }}">{{ __('Home') }}</a><i class="bi bi-chevron-right"></i><a href="{{ route('articles.index') }}">{{ __('Articole') }}</a><i class="bi bi-chevron-right"></i><span>{{ $localizedArticle['category_name'] }}</span></nav>
+        <nav class="breadcrumbs nav" aria-label="Breadcrumb"><a href="{{ route('home') }}">{{ __('Home') }}</a><i class="bi bi-chevron-right"></i><a href="{{ route('articles.index') }}">{{ __('Articole') }}</a><i class="bi bi-chevron-right"></i><span>{{ $localizedArticle['category_name'] }}</span></nav>
         <x-category-badge :category="$article->category" />
         <h1>{{ $localizedArticle['title'] }}</h1>
         <p class="article-excerpt">{{ $localizedArticle['excerpt'] }}</p>
@@ -51,7 +51,7 @@
     <aside class="article-sidebar">
         <h2>{{ __('Articole recomandate') }}</h2>
         @foreach($recommended as $suggestion)<x-recommended-article :article="$suggestion" />@endforeach
-        <div class="sidebar-cta"><i class="bi bi-shield-check"></i><h3>{{ __('Vrei mai multe ghiduri practice?') }}</h3><p>{{ __('Urmărește Securitate Digitală pentru articole noi despre confidențialitate, phishing, parole și siguranță online.') }}</p><a class="btn btn-primary" href="{{ route('articles.index') }}">{{ __('Vezi toate articolele') }}</a></div>
+        <div class="sidebar-cta"><i class="bi bi-shield-check"></i><h3>{{ __('Vrei mai multe ghiduri practice?') }}</h3><p>{{ __('Urmărește Securitate Digitală pentru articole noi despre confidențialitate, phishing, parole și siguranță online.') }}</p><a class="btn btn-outline-primary" href="{{ route('articles.index') }}">{{ __('Vezi toate articolele') }}</a></div>
     </aside>
 </div>
 @endsection

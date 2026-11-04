@@ -13,8 +13,8 @@
         <label class="admin-tree-search-label" for="contact-search">Caută mesaje</label>
         <div class="admin-tree-search">
             <i class="bi bi-search" aria-hidden="true"></i>
-            <input id="contact-search" name="q" type="search" value="{{ $search }}" placeholder="Nume, e-mail, subiect sau mesaj">
-            <button class="admin-button" type="submit">Caută</button>
+            <input class="form-control" id="contact-search" name="q" type="search" value="{{ $search }}" placeholder="Nume, e-mail, subiect sau mesaj">
+            <button class="admin-button btn btn-outline-primary" type="submit">Caută</button>
         </div>
     </form>
 
@@ -22,7 +22,7 @@
 
     <div class="admin-contact-list">
         @forelse($messages as $contactMessage)
-            <article class="admin-contact-card">
+            <article class="admin-contact-card card">
                 <header class="admin-contact-card-header">
                     <div>
                         <h2><a href="{{ route('admin.contact.show', $contactMessage) }}">{{ $contactMessage->subject }}</a></h2>
@@ -31,7 +31,7 @@
                     <time datetime="{{ $contactMessage->created_at->toIso8601String() }}">{{ $contactMessage->created_at->format('d.m.Y, H:i') }}</time>
                 </header>
                 <p class="admin-contact-body">{{ $contactMessage->message }}</p>
-                <footer class="admin-contact-card-actions"><a class="admin-table-link" href="{{ route('admin.contact.show', $contactMessage) }}">Deschide mesajul <i class="bi bi-arrow-right" aria-hidden="true"></i></a><form method="post" action="{{ route('admin.contact.destroy', $contactMessage) }}" onsubmit="return confirm('Ștergi definitiv acest mesaj? Acțiunea nu poate fi anulată.');">@csrf @method('delete')<button class="admin-button danger" type="submit">Șterge mesajul</button></form></footer>
+                <footer class="admin-contact-card-actions"><a class="admin-table-link" href="{{ route('admin.contact.show', $contactMessage) }}">Deschide mesajul <i class="bi bi-arrow-right" aria-hidden="true"></i></a><form method="post" action="{{ route('admin.contact.destroy', $contactMessage) }}" onsubmit="return confirm('Ștergi definitiv acest mesaj? Acțiunea nu poate fi anulată.');">@csrf @method('delete')<button class="admin-button danger btn btn-outline-primary" type="submit">Șterge mesajul</button></form></footer>
             </article>
         @empty
             <p class="admin-contact-empty">{{ $search ? 'Nu am găsit mesaje pentru această căutare.' : 'Nu au fost primite mesaje.' }}</p>

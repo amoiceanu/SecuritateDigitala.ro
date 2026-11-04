@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        \Illuminate\Pagination\Paginator::useBootstrapFive();
         View::composer('admin.layout', function ($view): void {
             $sections = Category::with(['articles' => function ($query): void {
                 $query->select(['id', 'category_id', 'title', 'status'])->orderBy('title');

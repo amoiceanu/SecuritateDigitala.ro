@@ -10,13 +10,13 @@
 </section>
 <section class="container section article-listing">
     <form class="filter-bar" action="{{ route('articles.index') }}" method="get">
-        <label class="search-field"><i class="bi bi-search"></i><input name="q" value="{{ request('q') }}" placeholder="{{ __('Caută articole...') }}" aria-label="{{ __('Caută articole') }}"></label>
+        <label class="search-field"><i class="bi bi-search"></i><input class="form-control" name="q" value="{{ request('q') }}" placeholder="{{ __('Caută articole...') }}" aria-label="{{ __('Caută articole') }}"></label>
         <label class="visually-hidden" for="categoryFilter">{{ __('Filtrează după categorie') }}</label>
-        <select id="categoryFilter" name="categorie" onchange="this.form.submit()">
+        <select class="form-select" id="categoryFilter" name="categorie" onchange="this.form.submit()">
             <option value="">{{ __('Toate categoriile') }}</option>
             @foreach($categories as $category)@php($localizedCategory = app(\App\Support\LocalizedContent::class)->category($category))<option value="{{ $category->slug }}" @selected(request('categorie') === $category->slug)>{{ $localizedCategory['name'] }}</option>@endforeach
         </select>
-        <button class="btn btn-primary" type="submit">{{ __('Caută') }}</button>
+        <button class="btn btn-outline-primary" type="submit">{{ __('Caută') }}</button>
     </form>
     @if(request()->filled('q') || request()->filled('categorie'))<p class="results-note">{{ $articles->total() }} {{ __(' rezultate găsite') }}</p>@endif
     <div class="article-grid">

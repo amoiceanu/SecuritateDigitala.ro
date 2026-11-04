@@ -32,12 +32,12 @@
     <main id="main">@yield('content')</main>
     <x-footer />
     <div class="search-overlay" aria-hidden="true">
-        <button class="search-close icon-button" aria-label="{{ __('Închide căutarea') }}"><i class="bi bi-x-lg"></i></button>
+        <button class="search-close icon-button btn btn-outline-primary" aria-label="{{ __('Închide căutarea') }}"><i class="bi bi-x-lg"></i></button>
         <form action="{{ route('articles.index') }}" method="get">
             <label for="overlaySearch">{{ __('Caută în Securitate Digitală') }}</label>
             <div>
-                <input id="overlaySearch" name="q" type="search" placeholder="{{ __('Caută articole...') }}" required>
-                <button class="btn btn-primary" type="submit" aria-label="{{ __('Caută') }}"><i class="bi bi-search"></i></button>
+                <input class="form-control" id="overlaySearch" name="q" type="search" placeholder="{{ __('Caută articole...') }}" required>
+                <button class="btn btn-outline-primary" type="submit" aria-label="{{ __('Caută') }}"><i class="bi bi-search"></i></button>
             </div>
         </form>
     </div>

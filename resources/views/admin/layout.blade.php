@@ -14,7 +14,7 @@
     <header class="admin-topbar">
         <a class="admin-brand" href="{{ route('admin.articole.index') }}"><i class="bi bi-shield-lock-fill"></i><span>Securitate Digitală <small>ADMIN</small></span></a>
         <div class="admin-actions">
-            <nav class="admin-nav" aria-label="Administrare">
+            <nav class="admin-nav nav" aria-label="Administrare">
                 <a class="{{ request()->routeIs('admin.articole.*') ? 'active' : '' }}" href="{{ route('admin.articole.index') }}">Articole</a>
                 <a class="{{ request()->routeIs('admin.editorial.*') ? 'active' : '' }}" href="{{ route('admin.editorial.index') }}">Calendar editorial</a>
                 <a class="{{ request()->routeIs('admin.sectiuni.*') ? 'active' : '' }}" href="{{ route('admin.sectiuni.index') }}">Secțiuni</a>
@@ -23,15 +23,15 @@
                 <a class="{{ request()->routeIs('admin.contact.*') ? 'active' : '' }}" href="{{ route('admin.contact.index') }}">Contact</a>
             </nav>
             <span class="admin-user">{{ auth()->user()->name }}</span>
-            <form action="{{ route('admin.logout') }}" method="post">@csrf<button class="admin-button" type="submit">Ieșire</button></form>
+            <form action="{{ route('admin.logout') }}" method="post">@csrf<button class="admin-button btn btn-outline-primary" type="submit">Ieșire</button></form>
         </div>
     </header>
     <main class="admin-main {{ request()->routeIs('admin.articole.*', 'admin.editorial.*', 'admin.sectiuni.*', 'admin.sfaturi.*', 'admin.google-indexing.*', 'admin.contact.*') ? 'admin-wide-page' : '' }}">
         <div class="admin-workspace">
             <aside class="admin-sidebar" aria-label="Arbore secțiuni și articole">
                 <label class="admin-tree-search-label" for="admin-tree-search">Caută în meniu</label>
-                <div class="admin-tree-search"><i class="bi bi-search" aria-hidden="true"></i><input id="admin-tree-search" type="search" placeholder="Secțiune sau articol" autocomplete="off"><button type="button" id="admin-tree-clear" aria-label="Șterge căutarea" hidden><i class="bi bi-x-lg" aria-hidden="true"></i></button></div>
-                <nav class="admin-tree" id="admin-tree" aria-label="Secțiuni și articole">
+                <div class="admin-tree-search"><i class="bi bi-search" aria-hidden="true"></i><input class="form-control" id="admin-tree-search" type="search" placeholder="Secțiune sau articol" autocomplete="off"><button class="btn btn-outline-primary" type="button" id="admin-tree-clear" aria-label="Șterge căutarea" hidden><i class="bi bi-x-lg" aria-hidden="true"></i></button></div>
+                <nav class="admin-tree nav" id="admin-tree" aria-label="Secțiuni și articole">
                     @forelse($adminSections as $section)
                         <details class="admin-tree-section" data-section-name="{{ mb_strtolower($section->name) }}" @if($section->articles->contains('id', request()->route('article')?->id)) open @endif>
                             <summary><i class="bi bi-chevron-right tree-chevron" aria-hidden="true"></i><span class="tree-section-name">{{ $section->name }}</span><span class="tree-count">{{ $section->articles->count() }}</span></summary>

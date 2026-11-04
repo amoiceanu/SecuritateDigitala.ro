@@ -22,16 +22,16 @@
     </div>
     <form class="contact-form" action="{{ route('contact.store') }}" method="post">
         @csrf
-        <div class="honeypot" aria-hidden="true"><label for="website">{{ __('Lasă gol') }}</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+        <div class="honeypot" aria-hidden="true"><label for="website">{{ __('Lasă gol') }}</label><input class="form-control" id="website" name="website" tabindex="-1" autocomplete="off"></div>
         <div class="form-row">
-            <label>{{ __('Nume') }}<input name="name" value="{{ old('name') }}" autocomplete="name" required>@error('name')<small class="field-error">{{ $message }}</small>@enderror</label>
-            <label>{{ __('E-mail') }}<input type="email" name="email" value="{{ old('email') }}" autocomplete="email" required>@error('email')<small class="field-error">{{ $message }}</small>@enderror</label>
+            <label>{{ __('Nume') }}<input class="form-control" name="name" value="{{ old('name') }}" autocomplete="name" required>@error('name')<small class="field-error">{{ $message }}</small>@enderror</label>
+            <label>{{ __('E-mail') }}<input class="form-control" type="email" name="email" value="{{ old('email') }}" autocomplete="email" required>@error('email')<small class="field-error">{{ $message }}</small>@enderror</label>
         </div>
-        <label>{{ __('Subiect') }}<input name="subject" value="{{ old('subject') }}" required>@error('subject')<small class="field-error">{{ $message }}</small>@enderror</label>
-        <label>{{ __('Mesaj') }}<textarea name="message" rows="6" aria-describedby="contact-message-help" required>{{ old('message') }}</textarea><small class="field-hint" id="contact-message-help">{{ __('Oferă câteva detalii ca să-ți putem răspunde cât mai util.') }}</small>@error('message')<small class="field-error">{{ $message }}</small>@enderror</label>
-        <label class="check-label"><input type="checkbox" name="privacy_accepted" value="1" @checked(old('privacy_accepted')) required><span>{{ __('Sunt de acord cu prelucrarea datelor furnizate pentru a primi un răspuns la solicitarea mea. ') }}<a href="{{ route('privacy') }}">{{ __('Detalii') }}</a></span></label>
+        <label>{{ __('Subiect') }}<input class="form-control" name="subject" value="{{ old('subject') }}" required>@error('subject')<small class="field-error">{{ $message }}</small>@enderror</label>
+        <label>{{ __('Mesaj') }}<textarea class="form-control" name="message" rows="6" aria-describedby="contact-message-help" required>{{ old('message') }}</textarea><small class="field-hint" id="contact-message-help">{{ __('Oferă câteva detalii ca să-ți putem răspunde cât mai util.') }}</small>@error('message')<small class="field-error">{{ $message }}</small>@enderror</label>
+        <label class="check-label"><input class="form-check-input" type="checkbox" name="privacy_accepted" value="1" @checked(old('privacy_accepted')) required><span>{{ __('Sunt de acord cu prelucrarea datelor furnizate pentru a primi un răspuns la solicitarea mea. ') }}<a href="{{ route('privacy') }}">{{ __('Detalii') }}</a></span></label>
         @error('privacy_accepted')<small class="field-error">{{ $message }}</small>@enderror
-        <button class="btn btn-primary" type="submit">{{ __('Trimite mesajul') }} <i class="bi bi-arrow-right"></i></button>
+        <button class="btn btn-outline-primary" type="submit">{{ __('Trimite mesajul') }} <i class="bi bi-arrow-right"></i></button>
     </form>
 </section>
 @endsection

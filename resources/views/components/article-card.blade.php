@@ -1,6 +1,6 @@
 @props(['article'])
 @php($localizedArticle = app(\App\Support\LocalizedContent::class)->article($article))
-<article class="article-card">
+<article class="article-card card">
     <a class="card-image" href="{{ route('articles.show', $article) }}" aria-label="{{ __('Citește: ') }}{{ $localizedArticle['title'] }}">
         <img src="{{ $article->image_url }}" @if($article->image_srcset)srcset="{{ $article->image_srcset }}" sizes="(max-width: 767px) 100vw, 33vw"@endif alt="{{ app()->isLocale('en') ? 'Photograph for '.$localizedArticle['title'] : $article->image_alt }}" width="{{ $article->heroMedia?->asset?->width ?? 800 }}" height="{{ $article->heroMedia?->asset?->height ?? 450 }}" loading="lazy" decoding="async" onerror="this.style.display='none'">
     </a>

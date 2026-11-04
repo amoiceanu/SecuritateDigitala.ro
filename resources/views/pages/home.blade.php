@@ -9,7 +9,7 @@
         <h1>{{ __('Securitate cibernetică pentru') }} <span>{{ __('viața de zi cu zi.') }}</span></h1>
         <p>{{ __('Ghiduri clare de securitate online și siguranță online: protejează-ți conturile și datele, recunoaște phishingul și evită fraudele digitale.') }}</p>
         <div class="hero-actions">
-            @if($sitePages->enabled('guides'))<a class="btn btn-primary" href="{{ route('articles.index', ['categorie' => 'ghiduri-practice']) }}">{{ __('Citește ghidurile') }} <i class="bi bi-arrow-right"></i></a>@endif
+            @if($sitePages->enabled('guides'))<a class="btn btn-outline-primary" href="{{ route('articles.index', ['categorie' => 'ghiduri-practice']) }}">{{ __('Citește ghidurile') }} <i class="bi bi-arrow-right"></i></a>@endif
             @if($sitePages->enabled('articles'))<a class="btn btn-outline-light" href="#ultimele">{{ __('Cele mai noi articole') }}</a>@endif
         </div>
         <div class="trust-note"><i class="bi bi-check-circle-fill"></i> {{ __('Sfaturi clare. Mai mult control. Mai multă siguranță.') }}</div>
@@ -17,8 +17,8 @@
     <div class="hero-art" aria-label="{{ __('Ilustrație abstractă de securitate digitală') }}">
         <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
         <div class="shield-art"><i class="bi bi-shield-lock-fill"></i><span class="shield-spark"></span></div>
-        <div class="float-card float-top"><i class="bi bi-lock-fill"></i> {{ __('Date protejate') }}</div>
-        <div class="float-card float-bottom"><i class="bi bi-activity"></i> {{ __('Securitate activă') }}</div>
+        <div class="float-card float-top card"><i class="bi bi-lock-fill"></i> {{ __('Date protejate') }}</div>
+        <div class="float-card float-bottom card"><i class="bi bi-activity"></i> {{ __('Securitate activă') }}</div>
         <div class="matrix">01&nbsp; 10&nbsp; 11<br>10&nbsp; 01&nbsp; 01<br>11&nbsp; 10&nbsp; 00</div>
     </div>
 </section>
@@ -45,6 +45,6 @@
         @endforeach
     </div>
 </div></section>
-<section class="container newsletter-cta"><div><span class="eyebrow">{{ __('SIGURANȚA ÎNCEPE CU INFORMAȚIA') }}</span><h2>{{ __('Fă din securitate un obicei.') }}</h2><p>{{ __('Idei practice, pe înțelesul tuturor. Descoperă ghidurile Securitate Digitală.') }}</p></div><a class="btn btn-primary" href="{{ route('articles.index') }}">{{ __('Explorează articolele') }} <i class="bi bi-arrow-right"></i></a></section>
+<section class="container newsletter-cta"><div><span class="eyebrow">{{ __('SIGURANȚA ÎNCEPE CU INFORMAȚIA') }}</span><h2>{{ __('Fă din securitate un obicei.') }}</h2><p>{{ __('Idei practice, pe înțelesul tuturor. Descoperă ghidurile Securitate Digitală.') }}</p></div><a class="btn btn-outline-primary" href="{{ route('articles.index') }}">{{ __('Explorează articolele') }} <i class="bi bi-arrow-right"></i></a></section>
 @endif
 @endsection

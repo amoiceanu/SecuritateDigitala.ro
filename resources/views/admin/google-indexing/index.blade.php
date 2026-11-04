@@ -4,17 +4,17 @@
 <div class="admin-heading">
     <div><h1>Google Indexing</h1><p>Audit tehnic pentru URL-urile publice și integrarea autorizată cu Search Console.</p></div>
     <div class="google-indexing-toolbar">
-        <form method="post" action="{{ route('admin.google-indexing.validate-sitemap') }}">@csrf<button class="admin-button" type="submit">Validează sitemap</button></form>
-        <form method="post" action="{{ route('admin.google-indexing.audit') }}">@csrf<button class="admin-button primary" type="submit">Rulează audit</button></form>
+        <form method="post" action="{{ route('admin.google-indexing.validate-sitemap') }}">@csrf<button class="admin-button btn btn-outline-primary" type="submit">Validează sitemap</button></form>
+        <form method="post" action="{{ route('admin.google-indexing.audit') }}">@csrf<button class="admin-button primary btn btn-outline-primary" type="submit">Rulează audit</button></form>
         <a class="admin-button" href="{{ route('admin.google-indexing.export') }}">Exportă URL-uri CSV</a>
     </div>
 </div>
 @if(session('sitemap_validation'))<div class="admin-success" role="status">Sitemap XML valid: {{ session('sitemap_validation.count') }} URL-uri, verificat {{ session('sitemap_validation.validated_at') }}.</div>@endif
 <section class="admin-stats google-indexing-stats" aria-label="Indexare: statistici">
-    <article class="admin-stat-card"><div class="admin-stat-label"><span>Articole publicate</span><i class="bi bi-file-earmark-text" aria-hidden="true"></i></div><strong>{{ number_format($summary['published_articles']) }}</strong><small>Eligibile după stare și dată</small></article>
-    <article class="admin-stat-card"><div class="admin-stat-label"><span>URL-uri de secțiune</span><i class="bi bi-collection" aria-hidden="true"></i></div><strong>{{ number_format($summary['eligible_categories']) }}</strong><small>Secțiuni cu articole publice</small></article>
-    <article class="admin-stat-card"><div class="admin-stat-label"><span>Indexabile local</span><i class="bi bi-check2-circle" aria-hidden="true"></i></div><strong>{{ $summary['locally_indexable'] === null ? '—' : number_format($summary['locally_indexable']) }}</strong><small>Confirmate la ultimul audit</small></article>
-    <article class="admin-stat-card"><div class="admin-stat-label"><span>URL-uri în sitemap</span><i class="bi bi-diagram-3" aria-hidden="true"></i></div><strong>{{ $summary['sitemap_urls'] === null ? '—' : number_format($summary['sitemap_urls']) }}</strong><small>Din sitemap-ul public</small></article>
+    <article class="admin-stat-card card"><div class="admin-stat-label"><span>Articole publicate</span><i class="bi bi-file-earmark-text" aria-hidden="true"></i></div><strong>{{ number_format($summary['published_articles']) }}</strong><small>Eligibile după stare și dată</small></article>
+    <article class="admin-stat-card card"><div class="admin-stat-label"><span>URL-uri de secțiune</span><i class="bi bi-collection" aria-hidden="true"></i></div><strong>{{ number_format($summary['eligible_categories']) }}</strong><small>Secțiuni cu articole publice</small></article>
+    <article class="admin-stat-card card"><div class="admin-stat-label"><span>Indexabile local</span><i class="bi bi-check2-circle" aria-hidden="true"></i></div><strong>{{ $summary['locally_indexable'] === null ? '—' : number_format($summary['locally_indexable']) }}</strong><small>Confirmate la ultimul audit</small></article>
+    <article class="admin-stat-card card"><div class="admin-stat-label"><span>URL-uri în sitemap</span><i class="bi bi-diagram-3" aria-hidden="true"></i></div><strong>{{ $summary['sitemap_urls'] === null ? '—' : number_format($summary['sitemap_urls']) }}</strong><small>Din sitemap-ul public</small></article>
 </section>
 <section class="admin-panel google-indexing-summary">
     <div><span>Sitemap înregistrat</span><strong>{{ $summary['sitemap_urls'] === null ? 'Neverificat' : number_format($summary['sitemap_urls']).' URL-uri' }}</strong></div>
@@ -33,26 +33,26 @@
     </div>
     <div class="google-connection-actions">
         @if(!$connection || !$propertyAvailable)
-            <form method="post" action="{{ route('admin.google-indexing.connect') }}">@csrf<button class="admin-button primary" type="submit" @disabled(!$google->configured())>Conectează Search Console</button></form>
+            <form method="post" action="{{ route('admin.google-indexing.connect') }}">@csrf<button class="admin-button primary btn btn-outline-primary" type="submit" @disabled(!$google->configured())>Conectează Search Console</button></form>
         @else
-            <form method="post" action="{{ route('admin.google-indexing.sitemap') }}">@csrf<button class="admin-button" type="submit">Trimite sitemap</button></form>
-            <form method="post" action="{{ route('admin.google-indexing.refresh') }}">@csrf<button class="admin-button" type="submit">Actualizează datele Google</button></form>
-            <form method="post" action="{{ route('admin.google-indexing.disconnect') }}">@csrf @method('delete')<button class="admin-button danger" type="submit">Deconectează</button></form>
+            <form method="post" action="{{ route('admin.google-indexing.sitemap') }}">@csrf<button class="admin-button btn btn-outline-primary" type="submit">Trimite sitemap</button></form>
+            <form method="post" action="{{ route('admin.google-indexing.refresh') }}">@csrf<button class="admin-button btn btn-outline-primary" type="submit">Actualizează datele Google</button></form>
+            <form method="post" action="{{ route('admin.google-indexing.disconnect') }}">@csrf @method('delete')<button class="admin-button danger btn btn-outline-primary" type="submit">Deconectează</button></form>
         @endif
     </div>
 </section>
 <section class="admin-panel google-indexing-table-wrap">
     <div class="google-table-heading"><div><h2>URL-uri publice</h2><p>Un URL devine „indexabil local” doar dacă trece verificările HTTP, canonical, robots, sitemap și descoperire internă.</p></div>@if($audit)<span class="google-audit-state">Audit #{{ $audit->id }} · {{ $audit->status }} · {{ $audit->completed_at?->toDateTimeString() ?? $audit->created_at->toDateTimeString() }}</span>@endif</div>
-    <table class="admin-table google-indexing-table"><thead><tr><th>Titlu</th><th>Tip</th><th>HTTP</th><th>Canonical</th><th>Sitemap</th><th>Indexabilitate locală</th><th>Stare Google</th><th>Acțiuni</th></tr></thead><tbody>
+    <table class="admin-table google-indexing-table table table-hover align-middle"><thead><tr><th>Titlu</th><th>Tip</th><th>HTTP</th><th>Canonical</th><th>Sitemap</th><th>Indexabilitate locală</th><th>Stare Google</th><th>Acțiuni</th></tr></thead><tbody>
     @forelse($items as $item)
         <tr>
             <td><span class="row-title">{{ $item->title }}</span><small>{{ $item->url }}</small>@if($item->problems)<small class="google-problems">{{ implode(', ', $item->problems) }}</small>@endif</td>
             <td>{{ $item->type }}</td><td>{{ $item->http_status ?? '—' }}</td>
             <td>@if($item->canonical_url)<a class="admin-table-link" href="{{ $item->canonical_url }}" target="_blank" rel="noopener">Vezi canonical</a>@else—@endif</td>
             <td>{{ $item->sitemap_included ? 'Da' : ($audit?->status === 'completed' ? 'Nu' : '—') }}</td>
-            <td><span class="admin-badge {{ $item->local_status === 'eligible' ? 'published' : ($item->local_status === 'invalid' ? 'draft' : '') }}">{{ ['eligible' => 'Indexabil local', 'invalid' => 'Problemă locală', 'not_checked' => 'Neverificat'][$item->local_status] ?? $item->local_status }}</span></td>
-            <td>@if($item->google_status === 'indexed')<span class="admin-badge published">Indexat de Google</span>@elseif($item->google_status === 'not_indexed')<span class="admin-badge draft">Neindexat de Google</span>@else<span class="google-muted">Necunoscut</span>@endif</td>
-            <td class="google-row-actions"><a class="admin-button" href="{{ $item->url }}" target="_blank" rel="noopener">Deschide</a><button class="admin-button" type="button" data-copy-url="{{ $item->canonical_url ?: $item->url }}">Copiază URL</button><form method="post" action="{{ route('admin.google-indexing.audit') }}">@csrf<button class="admin-button" type="submit">Reverifică site-ul</button></form><a class="admin-button" href="https://search.google.com/search-console/inspect?resource_id={{ urlencode('sc-domain:securitatedigitala.ro') }}&amp;url={{ urlencode($item->canonical_url ?: $item->url) }}" target="_blank" rel="noopener">Deschide URL Inspection</a>@if($connection && $propertyAvailable && $item->id)<form method="post" action="{{ route('admin.google-indexing.inspect', $item) }}">@csrf<button class="admin-button" type="submit">Verifică în Google</button></form>@endif</td>
+            <td><span class="admin-badge {{ $item->local_status === 'eligible' ? 'published' : ($item->local_status === 'invalid' ? 'draft' : '') }} badge">{{ ['eligible' => 'Indexabil local', 'invalid' => 'Problemă locală', 'not_checked' => 'Neverificat'][$item->local_status] ?? $item->local_status }}</span></td>
+            <td>@if($item->google_status === 'indexed')<span class="admin-badge published badge">Indexat de Google</span>@elseif($item->google_status === 'not_indexed')<span class="admin-badge draft badge">Neindexat de Google</span>@else<span class="google-muted">Necunoscut</span>@endif</td>
+            <td class="google-row-actions"><a class="admin-button" href="{{ $item->url }}" target="_blank" rel="noopener">Deschide</a><button class="admin-button btn btn-outline-primary" type="button" data-copy-url="{{ $item->canonical_url ?: $item->url }}">Copiază URL</button><form method="post" action="{{ route('admin.google-indexing.audit') }}">@csrf<button class="admin-button btn btn-outline-primary" type="submit">Reverifică site-ul</button></form><a class="admin-button" href="https://search.google.com/search-console/inspect?resource_id={{ urlencode('sc-domain:securitatedigitala.ro') }}&amp;url={{ urlencode($item->canonical_url ?: $item->url) }}" target="_blank" rel="noopener">Deschide URL Inspection</a>@if($connection && $propertyAvailable && $item->id)<form method="post" action="{{ route('admin.google-indexing.inspect', $item) }}">@csrf<button class="admin-button btn btn-outline-primary" type="submit">Verifică în Google</button></form>@endif</td>
         </tr>
     @empty<tr><td colspan="8">Nu există URL-uri eligibile de verificat.</td></tr>@endforelse
     </tbody></table>

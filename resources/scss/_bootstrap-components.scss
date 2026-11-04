@@ -1,0 +1,15 @@
+// Project integration for Bootstrap 5.3 components.
+.btn { gap: .4rem; }
+.form-control, .form-select { min-width: 0; }
+.table-responsive { max-width: 100%; }
+[hidden] { display: none !important; }
+.dropdown-menu { z-index: 1080; }
+.modal .modal-content { max-width: 100%; }
+.bootstrap-layout-grid { display: grid; }
+.bootstrap-layout-grid > * { min-width: 0; }
+
+.border-transparent{border-color:transparent!important}
+.border-current{border-color:currentColor}
+.w-fit{width:fit-content}
+.self-center{align-self:center}
+.navbar a{text-decoration:none}

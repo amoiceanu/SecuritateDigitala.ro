@@ -1,3 +1,4 @@
+import 'bootstrap';
 document.addEventListener('DOMContentLoaded', () => {
     const menu = document.querySelector('.menu-toggle');
     const nav = document.querySelector('#navLinks');
